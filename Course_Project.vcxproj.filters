@@ -13,5 +13,60 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\models">
+      <UniqueIdentifier>{f4066001-302f-4988-8ee4-b4dbd9ba6375}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\io">
+      <UniqueIdentifier>{5cc272df-3997-4270-895d-d92ffcff6591}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\services">
+      <UniqueIdentifier>{262e41d5-8bd3-4667-9c0d-d882a2c6aed3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ui">
+      <UniqueIdentifier>{a0030d0a-30da-4754-8aef-a1e79f03c28e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Transaction.h">
+      <Filter>Header Files\models</Filter>
+    </ClCompile>
+    <ClCompile Include="dataCalc.h">
+      <Filter>Header Files\services</Filter>
+    </ClCompile>
+    <ClCompile Include="dataEdit.h">
+      <Filter>Header Files\services</Filter>
+    </ClCompile>
+    <ClCompile Include="dataSearch.h">
+      <Filter>Header Files\services</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Employee.h">
+      <Filter>Header Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Header Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="Branch.h">
+      <Filter>Header Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="Account.h">
+      <Filter>Header Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="fileIO.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="dataSort.h">
+      <Filter>Header Files\services</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="dataView.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
