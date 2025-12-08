@@ -2,11 +2,11 @@
 #ifndef DATASEARCH_H
 #define DATASEARCH_H
 
-#include "../models/Client.h"
-#include "../models/Employee.h"
-#include "../models/Account.h"
-#include "../models/Transaction.h"
-#include "../models/Branch.h"
+#include "../Course_Project/Client.h"
+#include "../Course_Project/Employee.h"
+#include "../Course_Project/Account.h"
+#include "../Course_Project/Transaction.h"
+#include "../Course_Project/Branch.h"
 
 Client* searchClientById(Client* clients, int numClients, long id);
 Client* searchClientByName(Client* clients, int numClients, const char* name);

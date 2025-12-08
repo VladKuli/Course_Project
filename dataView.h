@@ -2,12 +2,11 @@
 #ifndef DATAVIEW_H
 #define DATAVIEW_H
 
-
-#include "../"
-#include "../models/Employee.h"
-#include "../models/Account.h"
-#include "../models/Transaction.h"
-#include "../models/Branch.h"
+#include "../Course_Project/Client.h"
+#include "../Course_Project/Employee.h"
+#include "../Course_Project/Account.h"
+#include "../Course_Project/Transaction.h"
+#include "../Course_Project/Branch.h"
 
 void viewClient(const Client& client);
 void viewEmployee(const Employee& employee);
