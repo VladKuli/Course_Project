@@ -25,6 +25,15 @@
     <Filter Include="Header Files\ui">
       <UniqueIdentifier>{a0030d0a-30da-4754-8aef-a1e79f03c28e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\services">
+      <UniqueIdentifier>{250a574c-e1de-45dd-b54c-22dc026e5451}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\io">
+      <UniqueIdentifier>{a582b588-dd9c-475b-b54c-cedaf574412c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ui">
+      <UniqueIdentifier>{ee502c22-57a8-4873-ab53-82e8800156df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -41,6 +50,27 @@
     </ClCompile>
     <ClCompile Include="dataSearch.h">
       <Filter>Header Files\services</Filter>
+    </ClCompile>
+    <ClCompile Include="fileIO.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="dataCalc.cpp">
+      <Filter>Source Files\services</Filter>
+    </ClCompile>
+    <ClCompile Include="dataEdit.cpp">
+      <Filter>Source Files\services</Filter>
+    </ClCompile>
+    <ClCompile Include="dataSearch.cpp">
+      <Filter>Source Files\services</Filter>
+    </ClCompile>
+    <ClCompile Include="dataSort.cpp">
+      <Filter>Source Files\services</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="dataView.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

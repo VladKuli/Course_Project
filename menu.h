@@ -22,42 +22,5 @@ void displayAccountMenu();
 void displayTransactionMenu();
 void displayBranchMenu();
 
-// --------------------- HANDLERS ---------------------
-void handleClientMenu(Client** clients, int* numClients);
-void handleEmployeeMenu(Employee** employees, int* numEmployees);
-void handleAccountMenu(Account** accounts, int* numAccounts);
-void handleTransactionMenu(Transaction** transactions, int* numTransactions);
-void handleBranchMenu(Branch** branches, int* numBranches);
-
-void handleLoadData(Client** clients, int* numClients,
-    Employee** employees, int* numEmployees,
-    Account** accounts, int* numAccounts,
-    Transaction** transactions, int* numTransactions,
-    Branch** branches, int* numBranches);
-
-void handleSaveData(Client* clients, int numClients,
-    Employee* employees, int numEmployees,
-    Account* accounts, int numAccounts,
-    Transaction* transactions, int numTransactions,
-    Branch* branches, int numBranches);
-
-void handleCalculateData(Client* clients, int numClients,
-    Employee* employees, int numEmployees,
-    Branch* branches, int numBranches);
-
-void handleSortData(Client* clients, int numClients,
-    Employee* employees, int numEmployees,
-    Account* accounts, int numAccounts,
-    Transaction* transactions, int numTransactions,
-    Branch* branches, int numBranches);
-
-// --------------------- MENU LOOP & PAUSE ---------------------
-void runMenu(Client** clients, int* numClients,
-    Employee** employees, int* numEmployees,
-    Account** accounts, int* numAccounts,
-    Transaction** transactions, int* numTransactions,
-    Branch** branches, int* numBranches);
-
-void pause();
 
 #endif

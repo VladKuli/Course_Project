@@ -100,8 +100,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <UseStandardPreprocessor>
+      </UseStandardPreprocessor>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,10 +125,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="dataCalc.cpp" />
     <ClCompile Include="dataCalc.h" />
+    <ClCompile Include="dataEdit.cpp" />
     <ClCompile Include="dataEdit.h" />
+    <ClCompile Include="dataSearch.cpp" />
     <ClCompile Include="dataSearch.h" />
+    <ClCompile Include="dataSort.cpp" />
+    <ClCompile Include="dataView.cpp" />
+    <ClCompile Include="fileIO.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="Transaction.h" />
   </ItemGroup>
   <ItemGroup>
