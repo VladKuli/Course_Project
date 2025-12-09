@@ -72,6 +72,12 @@
     <ClCompile Include="dataView.cpp">
       <Filter>Source Files\ui</Filter>
     </ClCompile>
+    <ClCompile Include="deleteData.h">
+      <Filter>Header Files\services</Filter>
+    </ClCompile>
+    <ClCompile Include="deleteData.cpp">
+      <Filter>Source Files\services</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Employee.h">

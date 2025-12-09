@@ -1,11 +1,15 @@
-﻿#include "../Course_Project/menu.h"
-#include "../Course_Project/dataView.h"
-#include "../Course_Project/dataEdit.h"
-#include "../Course_Project/dataSearch.h"
-#include "../Course_Project/dataSort.h"
-#include "../Course_Project/dataCalc.h"
-#include "../Course_Project/fileIO.h"
+﻿#include "menu.h"
+#include "dataView.h"
+#include "dataEdit.h"
+#include "dataSearch.h"
+#include "dataSort.h"
+#include "dataCalc.h"
+#include "deleteData.h"
+#include "fileIO.h"
+
 #include <iostream>
+#include <cstring>
+#include <ctime>
 
 using namespace std;
 
@@ -16,218 +20,603 @@ Account* accounts = nullptr; int numAccounts = 0;
 Transaction* transactions = nullptr; int numTransactions = 0;
 Branch* branches = nullptr; int numBranches = 0;
 
-// ---------------- CLIENT FUNCTIONS ----------------
-void addClient() {
-    Client c;
-    c.id = numClients + 1;
-    cin.ignore();
-    cout << "Enter client name: "; cin.getline(c.name, 50);
-    cout << "Enter address: "; cin.getline(c.address, 100);
-    cout << "Enter phone: "; cin.getline(c.phone, 15);
-    cout << "Enter email: "; cin.getline(c.email, 50);
-    c.accountId = 0; c.type = INDIVIDUAL; c.level = REGULAR;
-
-    Client* tmp = new Client[numClients + 1];
-    for(int i=0;i<numClients;i++) tmp[i] = clients[i];
-    tmp[numClients] = c;
-    delete[] clients; clients = tmp; numClients++;
-    cout << "Client added.\n";
-}
-
-void viewAllClients() { for(int i=0;i<numClients;i++) viewClient(clients[i]); }
-
+// ============ CLIENT MENU ============
 void handleClientMenu() {
     int choice;
     do {
         displayClientMenu();
-        cout << "Enter choice: "; cin >> choice;
-        switch(choice){
-            case 1: addClient(); break;
-            case 2: viewAllClients(); break;
-            case 3: {
-                long id; cout<<"Enter ID to edit: "; cin>>id;
-                Client* c = searchClientById(clients,numClients,id);
-                if(c) editClient(*c); else cout<<"Not found\n";
-                break;
-            }
-            case 4: {
-                char name[50]; cin.ignore();
-                cout<<"Enter name to search: "; cin.getline(name,50);
-                Client* c = searchClientByName(clients,numClients,name);
-                if(c) viewClient(*c); else cout<<"Not found\n";
-                break;
-            }
-            case 5: sortClientsByName(clients,numClients); cout<<"Sorted by name\n"; break;
-            case 0: break;
-            default: cout<<"Invalid option\n";
+        cout << "Choice: "; cin >> choice; cin.ignore();
+
+        switch (choice) {
+
+            // ADD
+        case 1: {
+            Client c;
+            c.id = numClients + 1;
+            cout << "Name: "; cin.getline(c.name, 50);
+            cout << "Address: "; cin.getline(c.address, 100);
+            cout << "Phone: "; cin.getline(c.phone, 15);
+            cout << "Email: "; cin.getline(c.email, 50);
+            c.type = INDIVIDUAL;
+            c.level = REGULAR;
+            c.accountId = 0;
+
+            Client* tmp = new Client[numClients + 1];
+            for (int i = 0; i < numClients; i++) tmp[i] = clients[i];
+            tmp[numClients] = c;
+            delete[] clients;
+            clients = tmp;
+            numClients++;
+
+            cout << "Client added.\n";
+            break;
         }
-    } while(choice!=0);
+
+              // VIEW ALL
+        case 2:
+            for (int i = 0; i < numClients; i++)
+                viewClient(clients[i]);
+            break;
+
+            // EDIT
+        case 3: {
+            long id;
+            cout << "ID: "; cin >> id;
+            Client* c = searchClientById(clients, numClients, id);
+            if (c) editClient(*c);
+            else cout << "Not found\n";
+            break;
+        }
+
+              // SEARCH
+        case 4: {
+            int s; cout << "Search: 1.ID 2.Name 3.Email: "; cin >> s; cin.ignore();
+            if (s == 1) {
+                long id; cout << "ID: "; cin >> id;
+                Client* c = searchClientById(clients, numClients, id);
+                if (c) viewClient(*c); else cout << "Not found\n";
+            }
+            else if (s == 2) {
+                char name[50];
+                cout << "Name: "; cin.getline(name, 50);
+                Client* c = searchClientByName(clients, numClients, name);
+                if (c) viewClient(*c); else cout << "Not found\n";
+            }
+            else if (s == 3) {
+                char email[50];
+                cout << "Email: "; cin.getline(email, 50);
+                Client* c = searchClientByEmail(clients, numClients, email);
+                if (c) viewClient(*c); else cout << "Not found\n";
+            }
+            break;
+        }
+
+              // SORT
+        case 5: {
+            int sortChoice;
+            cout << "Sort: 1.Name 2.Phone 3.Email: ";
+            cin >> sortChoice;
+
+            if (sortChoice == 1) sortClientsByName(clients, numClients);
+            else if (sortChoice == 2) sortClientByPhone(clients, numClients);
+            else if (sortChoice == 3) sortClientByEmail(clients, numClients);
+
+            cout << "\nSorted list:\n";
+            for (int i = 0; i < numClients; i++)
+                viewClient(clients[i]);
+
+            break;
+        }
+
+
+              // DELETE
+        case 6: {
+            int d; cout << "Delete: 1.ID 2.Name 3.Email: "; cin >> d; cin.ignore();
+            bool result = false;
+
+            if (d == 1) {
+                long id; cout << "ID: "; cin >> id;
+                result = deleteClientById(clients, numClients, id);
+            }
+            else if (d == 2) {
+                char name[50]; cout << "Name: "; cin.getline(name, 50);
+                result = deleteClientByName(clients, numClients, name);
+            }
+            else if (d == 3) {
+                char email[50]; cout << "Email: "; cin.getline(email, 50);
+                result = deleteClientByEmail(clients, numClients, email);
+            }
+
+            cout << (result ? "Deleted.\n" : "Not found.\n");
+            break;
+        }
+
+              // CALCULATIONS
+        case 7:
+            cout << "Total: " << calculateTotalClients(clients, numClients) << endl;
+            cout << "Regular: " << calculateClientsByLevel(clients, numClients, REGULAR) << endl;
+            cout << "Premium: " << calculateClientsByLevel(clients, numClients, PREMIUM) << endl;
+            cout << "VIP: " << calculateClientsByLevel(clients, numClients, VIP) << endl;
+            break;
+
+        case 0: break;
+        default: cout << "Invalid\n";
+        }
+    } while (choice != 0);
 }
 
-// ---------------- EMPLOYEE FUNCTIONS ----------------
-void addEmployee() {
-    Employee e; e.id = numEmployees+1;
-    cin.ignore();
-    cout<<"Enter name: "; cin.getline(e.name,50);
-    cout<<"Enter position: "; cin.getline(e.position,50);
-    cout<<"Enter department: "; cin.getline(e.department,50);
-    cout<<"Enter email: "; cin.getline(e.email,50);
-    cout<<"Enter phone: "; cin.getline(e.phone,15);
-    e.role=TELLER; e.level=JUNIOR;
 
-    Employee* tmp = new Employee[numEmployees+1];
-    for(int i=0;i<numEmployees;i++) tmp[i]=employees[i];
-    tmp[numEmployees]=e; delete[] employees; employees=tmp; numEmployees++;
-    cout<<"Employee added.\n";
-}
-
-void viewAllEmployees() { for(int i=0;i<numEmployees;i++) viewEmployee(employees[i]); }
-
+// =========================================================
+// EMPLOYEE MENU
+// =========================================================
 void handleEmployeeMenu() {
     int choice;
     do {
         displayEmployeeMenu();
-        cout<<"Enter choice: "; cin>>choice;
-        switch(choice){
-            case 1: addEmployee(); break;
-            case 2: viewAllEmployees(); break;
-            case 0: break;
-            default: cout<<"Invalid option\n";
+        cout << "Choice: "; cin >> choice; cin.ignore();
+
+        switch (choice) {
+
+            // ADD
+        case 1: {
+            Employee e;
+            e.id = numEmployees + 1;
+            cout << "Name: "; cin.getline(e.name, 50);
+            cout << "Position: "; cin.getline(e.position, 50);
+            cout << "Department: "; cin.getline(e.department, 50);
+            cout << "Email: "; cin.getline(e.email, 50);
+            cout << "Phone: "; cin.getline(e.phone, 15);
+
+            e.role = TELLER;
+            e.level = JUNIOR;
+
+            Employee* tmp = new Employee[numEmployees + 1];
+            for (int i = 0; i < numEmployees; i++) tmp[i] = employees[i];
+            tmp[numEmployees] = e;
+            delete[] employees;
+            employees = tmp;
+            numEmployees++;
+
+            cout << "Employee added.\n";
+            break;
         }
-    } while(choice!=0);
+
+              // VIEW ALL
+        case 2:
+            for (int i = 0; i < numEmployees; i++) viewEmployee(employees[i]);
+            break;
+
+            // EDIT
+        case 3: {
+            long id; cout << "ID: "; cin >> id;
+            Employee* e = searchEmployeeById(employees, numEmployees, id);
+            if (e) editEmployee(*e);
+            else cout << "Not found\n";
+            break;
+        }
+
+              // SEARCH
+        case 4: {
+            int s; cout << "Search: 1.ID 2.Name 3.Email: "; cin >> s; cin.ignore();
+            if (s == 1) {
+                long id; cout << "ID: "; cin >> id;
+                Employee* e = searchEmployeeById(employees, numEmployees, id);
+                if (e) viewEmployee(*e); else cout << "Not found\n";
+            }
+            else if (s == 2) {
+                char name[50]; cout << "Name: "; cin.getline(name, 50);
+                Employee* e = searchEmployeeByName(employees, numEmployees, name);
+                if (e) viewEmployee(*e); else cout << "Not found\n";
+            }
+            else if (s == 3) {
+                char email[50]; cout << "Email: "; cin.getline(email, 50);
+                Employee* e = searchEmployeeByEmail(employees, numEmployees, email);
+                if (e) viewEmployee(*e); else cout << "Not found\n";
+            }
+            break;
+        }
+
+              // SORT
+        case 5: {
+            int s; cout << "Sort: 1.Name 2.Level 3.Department: "; cin >> s;
+            if (s == 1) sortEmployeesByName(employees, numEmployees);
+            else if (s == 2) sortEmployeeByLevel(employees, numEmployees);
+            else if (s == 3) sortEmployeeByDepartment(employees, numEmployees);
+            cout << "Sorted.\n";
+            break;
+        }
+
+              // DELETE
+        case 6: {
+            int d; cout << "Delete: 1.ID 2.Name 3.Email: "; cin >> d; cin.ignore();
+            bool result = false;
+
+            if (d == 1) {
+                long id; cout << "ID: "; cin >> id;
+                result = deleteEmployeeById(employees, numEmployees, id);
+            }
+            else if (d == 2) {
+                char name[50]; cout << "Name: "; cin.getline(name, 50);
+                result = deleteEmployeeByName(employees, numEmployees, name);
+            }
+            else if (d == 3) {
+                char email[50]; cout << "Email: "; cin.getline(email, 50);
+                result = deleteEmployeeByEmail(employees, numEmployees, email);
+            }
+
+            cout << (result ? "Deleted.\n" : "Not found.\n");
+            break;
+        }
+
+              // CALCULATIONS
+        case 7:
+            cout << "Total employees: " << calculateTotalEmployees(employees, numEmployees) << endl;
+            cout << "Managers: " << calculateEmployeesByRole(employees, numEmployees, MANAGER) << endl;
+            cout << "Telllers: " << calculateEmployeesByRole(employees, numEmployees, TELLER) << endl;
+            cout << "Senior lvl: " << calculateEmployeesByLevel(employees, numEmployees, SENIOR) << endl;
+            break;
+
+        case 0: break;
+        default: cout << "Invalid\n";
+        }
+    } while (choice != 0);
 }
 
-// ---------------- ACCOUNT FUNCTIONS ----------------
-void addAccount() {
-    Account a; a.id=numAccounts+1;
-    cin.ignore();
-    cout<<"Enter account number: "; cin>>a.number;
-    cout<<"Enter client ID: "; cin>>a.clientId; cin.ignore();
-    cout<<"Enter currency: "; cin.getline(a.currency,4);
-    cout<<"Enter balance: "; cin>>a.balance; a.type=SAVINGS; cin.ignore();
 
-    Account* tmp = new Account[numAccounts+1];
-    for(int i=0;i<numAccounts;i++) tmp[i]=accounts[i];
-    tmp[numAccounts]=a; delete[] accounts; accounts=tmp; numAccounts++;
-    cout<<"Account added.\n";
-}
-
-void viewAllAccounts() { for(int i=0;i<numAccounts;i++) viewAccount(accounts[i]); }
-
+// =========================================================
+// ACCOUNT MENU
+// =========================================================
 void handleAccountMenu() {
     int choice;
     do {
         displayAccountMenu();
-        cout<<"Enter choice: "; cin>>choice;
-        switch(choice){
-            case 1: addAccount(); break;
-            case 2: viewAllAccounts(); break;
-            case 0: break;
-            default: cout<<"Invalid option\n";
+        cout << "Choice: "; cin >> choice; cin.ignore();
+
+        switch (choice) {
+
+            // ADD
+        case 1: {
+            Account a;
+            a.id = numAccounts + 1;
+            cout << "Number: "; cin >> a.number; cin.ignore();
+            cout << "Currency: "; cin.getline(a.currency, 10);
+            cout << "Balance: "; cin >> a.balance;
+            a.clientId = 0;
+            a.type = SAVINGS;
+
+            Account* tmp = new Account[numAccounts + 1];
+            for (int i = 0; i < numAccounts; i++) tmp[i] = accounts[i];
+            tmp[numAccounts] = a;
+            delete[] accounts;
+            accounts = tmp;
+            numAccounts++;
+
+            cout << "Account added.\n";
+            break;
         }
-    } while(choice!=0);
+
+              // VIEW
+        case 2:
+            for (int i = 0; i < numAccounts; i++) viewAccount(accounts[i]);
+            break;
+
+            // EDIT
+        case 3: {
+            long id;
+            cout << "ID: "; cin >> id;
+            Account* a = searchAccountById(accounts, numAccounts, id);
+            if (a) editAccount(*a); else cout << "Not found\n";
+            break;
+        }
+
+              // SEARCH
+        case 4: {
+            int s; cout << "Search: 1.ID 2.Number 3.ClientID: "; cin >> s; cin.ignore();
+            if (s == 1) {
+                long id; cout << "ID: "; cin >> id;
+                Account* a = searchAccountById(accounts, numAccounts, id);
+                if (a) viewAccount(*a);
+                else cout << "Not found\n";
+            }
+            else if (s == 2) {
+                int number; cout << "Number: "; cin >> number;
+                Account* a = searchAccountByNumber(accounts, numAccounts, number);
+                if (a) viewAccount(*a);
+                else cout << "Not found\n";
+            }
+            else if (s == 3) {
+                long cid; cout << "Client ID: "; cin >> cid;
+                Account* a = searchAccountByClientId(accounts, numAccounts, cid);
+                if (a) viewAccount(*a);
+                else cout << "Not found\n";
+            }
+            break;
+        }
+
+              // SORT
+        case 5: {
+            int s; cout << "Sort: 1.Balance 2.Type 3.Currency: "; cin >> s;
+            if (s == 1) sortAccountsByBalance(accounts, numAccounts);
+            else if (s == 2) sortAccountsByType(accounts, numAccounts);
+            else if (s == 3) sortAccountsByCurrency(accounts, numAccounts);
+            cout << "Sorted.\n";
+            break;
+        }
+
+              // DELETE
+        case 6: {
+            int d; cout << "Delete: 1.ID 2.Number: "; cin >> d; cin.ignore();
+            bool result = false;
+
+            if (d == 1) {
+                long id; cout << "ID: "; cin >> id;
+                result = deleteAccountById(accounts, numAccounts, id);
+            }
+            else if (d == 2) {
+                int number; cout << "Number: "; cin >> number;
+                result = deleteAccountByNumber(accounts, numAccounts, number);
+            }
+
+            cout << (result ? "Deleted.\n" : "Not found.\n");
+            break;
+        }
+
+              // CALCULATIONS
+        case 7:
+            cout << "Total accounts: " << calculateTotalAccounts(accounts, numAccounts) << endl;
+            cout << "Savings: " << calculateAccountsByType(accounts, numAccounts, SAVINGS) << endl;
+            cout << "Checking: " << calculateAccountsByType(accounts, numAccounts, CHECKING) << endl;
+            cout << "USD accounts: " << calculateAccountsByCurrency(accounts, numAccounts, "USD") << endl;
+            break;
+
+        case 0: break;
+        default: cout << "Invalid\n";
+        }
+    } while (choice != 0);
 }
 
-// ---------------- TRANSACTION FUNCTIONS ----------------
-void addTransaction() {
-    Transaction t; t.id=numTransactions+1;
-    cin.ignore();
-    cout<<"Enter sender account ID: "; cin>>t.senderAccountId;
-    cout<<"Enter recipient account ID: "; cin>>t.recipientAccountId; cin.ignore();
-    cout<<"Enter purpose: "; cin.getline(t.purpose,100);
-    cout<<"Enter amount: "; cin>>t.amount; t.type=DEPOSIT; cin.ignore();
-    t.date=time(nullptr);
 
-    Transaction* tmp=new Transaction[numTransactions+1];
-    for(int i=0;i<numTransactions;i++) tmp[i]=transactions[i];
-    tmp[numTransactions]=t; delete[] transactions; transactions=tmp; numTransactions++;
-    cout<<"Transaction added.\n";
-}
-
-void viewAllTransactions() { for(int i=0;i<numTransactions;i++) viewTransaction(transactions[i]); }
-
+// =========================================================
+// TRANSACTION MENU
+// =========================================================
 void handleTransactionMenu() {
     int choice;
     do {
         displayTransactionMenu();
-        cout<<"Enter choice: "; cin>>choice;
-        switch(choice){
-            case 1: addTransaction(); break;
-            case 2: viewAllTransactions(); break;
-            case 0: break;
-            default: cout<<"Invalid option\n";
+        cout << "Choice: "; cin >> choice; cin.ignore();
+
+        switch (choice) {
+
+            // ADD
+        case 1: {
+            Transaction t;
+            t.id = numTransactions + 1;
+            t.date = time(nullptr);
+
+            cout << "Sender ID: "; cin >> t.senderAccountId;
+            cout << "Recipient ID: "; cin >> t.recipientAccountId;
+            cout << "Amount: "; cin >> t.amount; cin.ignore();
+            cout << "Purpose: "; cin.getline(t.purpose, 100);
+
+            t.type = TRANSFER;
+
+            Transaction* tmp = new Transaction[numTransactions + 1];
+            for (int i = 0; i < numTransactions; i++) tmp[i] = transactions[i];
+            tmp[numTransactions] = t;
+            delete[] transactions;
+            transactions = tmp;
+            numTransactions++;
+
+            cout << "Transaction added.\n";
+            break;
         }
-    } while(choice!=0);
+
+              // VIEW ALL
+        case 2:
+            for (int i = 0; i < numTransactions; i++) viewTransaction(transactions[i]);
+            break;
+
+            // EDIT
+        case 3: {
+            long id; cout << "ID: "; cin >> id;
+            Transaction* t = searchTransactionById(transactions, numTransactions, id);
+            if (t) editTransaction(*t); else cout << "Not found\n";
+            break;
+        }
+
+              // SEARCH
+        case 4: {
+            int s; cout << "Search: 1.ID 2.Purpose 3.SenderID: "; cin >> s; cin.ignore();
+            if (s == 1) {
+                long id; cout << "ID: "; cin >> id;
+                Transaction* t = searchTransactionById(transactions, numTransactions, id);
+                if (t) viewTransaction(*t); else cout << "Not found\n";
+            }
+            else if (s == 2) {
+                char purpose[100]; cout << "Purpose: "; cin.getline(purpose, 100);
+                Transaction* t = searchTransactionByPurpose(transactions, numTransactions, purpose);
+                if (t) viewTransaction(*t); else cout << "Not found\n";
+            }
+            else if (s == 3) {
+                long sid; cout << "SenderID: "; cin >> sid;
+                Transaction* t = searchTransactionBySenderAccountId(transactions, numTransactions, sid);
+                if (t) viewTransaction(*t); else cout << "Not found\n";
+            }
+            break;
+        }
+
+              // SORT
+        case 5: {
+            int s; cout << "Sort: 1.Date 2.Amount 3.Type: "; cin >> s;
+            if (s == 1) sortTransactionsByDate(transactions, numTransactions);
+            else if (s == 2) sortTransactionsByAmount(transactions, numTransactions);
+            else if (s == 3) sortTransactionsByType(transactions, numTransactions);
+            cout << "Sorted.\n";
+            break;
+        }
+
+              // DELETE
+        case 6: {
+            long id; cout << "ID: "; cin >> id;
+            bool result = deleteTransactionById(transactions, numTransactions, id);
+            cout << (result ? "Deleted.\n" : "Not found.\n");
+            break;
+        }
+
+              // CALC
+        case 7:
+            cout << "Total: " << calculateTotalTransactions(transactions, numTransactions) << endl;
+            cout << "Transfers: " << calculateTransactionsByType(transactions, numTransactions, TRANSFER) << endl;
+            cout << "Deposits: " << calculateTransactionsByType(transactions, numTransactions, DEPOSIT) << endl;
+            break;
+
+        case 0: break;
+        default: cout << "Invalid\n";
+        }
+    } while (choice != 0);
 }
 
-// ---------------- BRANCH FUNCTIONS ----------------
-void addBranch() {
-    Branch b; b.id=numBranches+1; cin.ignore();
-    cout<<"Enter branch name: "; cin.getline(b.name,50);
-    cout<<"Enter address: "; cin.getline(b.address,100);
-    cout<<"Enter phone: "; cin.getline(b.phone,15);
-    cout<<"Enter email: "; cin.getline(b.email,50);
-    b.type=RETAIL; b.size=SMALL; b.region=NORTH; b.status=ACTIVE;
-    b.managerId=0; b.numEmployees=0; b.numClients=0;
 
-    Branch* tmp=new Branch[numBranches+1];
-    for(int i=0;i<numBranches;i++) tmp[i]=branches[i];
-    tmp[numBranches]=b; delete[] branches; branches=tmp; numBranches++;
-    cout<<"Branch added.\n";
-}
-
-void viewAllBranches() { for(int i=0;i<numBranches;i++) viewBranch(branches[i]); }
-
+// =========================================================
+// BRANCH MENU
+// =========================================================
 void handleBranchMenu() {
     int choice;
     do {
         displayBranchMenu();
-        cout<<"Enter choice: "; cin>>choice;
-        switch(choice){
-            case 1: addBranch(); break;
-            case 2: viewAllBranches(); break;
-            case 0: break;
-            default: cout<<"Invalid option\n";
+        cout << "Choice: "; cin >> choice; cin.ignore();
+
+        switch (choice) {
+
+            // ADD
+        case 1: {
+            Branch b;
+            b.id = numBranches + 1;
+            cout << "Name: "; cin.getline(b.name, 50);
+            cout << "Address: "; cin.getline(b.address, 100);
+            cout << "Phone: "; cin.getline(b.phone, 15);
+            cout << "Email: "; cin.getline(b.email, 50);
+            b.type = RETAIL;
+            b.region = NORTH;
+            b.size = SMALL;
+            b.status = ACTIVE;
+            b.managerId = 0;
+            b.numClients = 0;
+            b.numEmployees = 0;
+
+            Branch* tmp = new Branch[numBranches + 1];
+            for (int i = 0; i < numBranches; i++) tmp[i] = branches[i];
+            tmp[numBranches] = b;
+            delete[] branches;
+            branches = tmp;
+            numBranches++;
+
+            cout << "Branch added.\n";
+            break;
         }
-    } while(choice!=0);
+
+              // VIEW
+        case 2:
+            for (int i = 0; i < numBranches; i++) viewBranch(branches[i]);
+            break;
+
+            // EDIT
+        case 3: {
+            long id; cout << "ID: "; cin >> id;
+            Branch* b = searchBranchById(branches, numBranches, id);
+            if (b) editBranch(*b); else cout << "Not found\n";
+            break;
+        }
+
+              // SEARCH
+        case 4: {
+            int s; cout << "Search: 1.ID 2.Name 3.ManagerID: "; cin >> s; cin.ignore();
+            if (s == 1) {
+                long id; cout << "ID: "; cin >> id;
+                Branch* b = searchBranchById(branches, numBranches, id);
+                if (b) viewBranch(*b); else cout << "Not found\n";
+            }
+            else if (s == 2) {
+                char name[50]; cout << "Name: "; cin.getline(name, 50);
+                Branch* b = searchBranchByName(branches, numBranches, name);
+                if (b) viewBranch(*b); else cout << "Not found\n";
+            }
+            else if (s == 3) {
+                long mid; cout << "Manager ID: "; cin >> mid;
+                Branch* b = searchBranchByManagerId(branches, numBranches, mid);
+                if (b) viewBranch(*b); else cout << "Not found\n";
+            }
+            break;
+        }
+
+              // SORT
+        case 5: {
+            int s; cout << "Sort: 1.Name 2.Region 3.Size: "; cin >> s;
+            if (s == 1) sortBranchesByName(branches, numBranches);
+            else if (s == 2) sortBranchesByRegion(branches, numBranches);
+            else if (s == 3) sortBranchesBySize(branches, numBranches);
+            cout << "Sorted.\n";
+            break;
+        }
+
+              // DELETE
+        case 6: {
+            long id; cout << "ID: "; cin >> id;
+            bool result = deleteBranchById(branches, numBranches, id);
+            cout << (result ? "Deleted.\n" : "Not found.\n");
+            break;
+        }
+
+              // CALC
+        case 7:
+            cout << "Total branches: " << calculateTotalBranches(branches, numBranches) << endl;
+            cout << "Retail: " << calculateBranchesByType(branches, numBranches, RETAIL) << endl;
+            cout << "North region: " << calculateBranchesByRegion(branches, numBranches, NORTH) << endl;
+            break;
+
+        case 0: break;
+        default: cout << "Invalid\n";
+        }
+    } while (choice != 0);
 }
 
-// ---------------- MAIN ----------------
+
+// =========================================================
+// MAIN
+// =========================================================
 int main() {
-    // Load data
-    loadClients("clients.dat",&clients,&numClients);
-    loadEmployees("employees.dat",&employees,&numEmployees);
-    loadAccounts("accounts.dat",&accounts,&numAccounts);
-    loadTransactions("transactions.dat",&transactions,&numTransactions);
-    loadBranches("branches.dat",&branches,&numBranches);
+    loadClients("clients.dat", &clients, &numClients);
+    loadEmployees("employees.dat", &employees, &numEmployees);
+    loadAccounts("accounts.dat", &accounts, &numAccounts);
+    loadTransactions("transactions.dat", &transactions, &numTransactions);
+    loadBranches("branches.dat", &branches, &numBranches);
 
     int choice;
     do {
         displayMainMenu();
-        cout<<"Enter choice: "; cin>>choice;
-        switch(choice){
-            case 1: handleClientMenu(); break;
-            case 2: handleEmployeeMenu(); break;
-            case 3: handleAccountMenu(); break;
-            case 4: handleTransactionMenu(); break;
-            case 5: handleBranchMenu(); break;
-            case 0: cout<<"Exiting...\n"; break;
-            default: cout<<"Invalid choice\n";
+        cout << "Choice: "; cin >> choice;
+
+        switch (choice) {
+        case 1: handleClientMenu(); break;
+        case 2: handleEmployeeMenu(); break;
+        case 3: handleAccountMenu(); break;
+        case 4: handleTransactionMenu(); break;
+        case 5: handleBranchMenu(); break;
+        case 0: cout << "Exiting...\n"; break;
+        default: cout << "Invalid\n";
         }
-    } while(choice!=0);
+    } while (choice != 0);
 
-    // Save data
-    saveClients("clients.dat",clients,numClients);
-    saveEmployees("employees.dat",employees,numEmployees);
-    saveAccounts("accounts.dat",accounts,numAccounts);
-    saveTransactions("transactions.dat",transactions,numTransactions);
-    saveBranches("branches.dat",branches,numBranches);
+    saveClients("clients.dat", clients, numClients);
+    saveEmployees("employees.dat", employees, numEmployees);
+    saveAccounts("accounts.dat", accounts, numAccounts);
+    saveTransactions("transactions.dat", transactions, numTransactions);
+    saveBranches("branches.dat", branches, numBranches);
 
-    // Free memory
-    delete[] clients; 
-    delete[] employees; 
-    delete[] accounts; 
-    delete[] transactions; 
+    delete[] clients;
+    delete[] employees;
+    delete[] accounts;
+    delete[] transactions;
     delete[] branches;
 
     return 0;

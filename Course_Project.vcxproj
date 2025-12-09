@@ -133,6 +133,8 @@
     <ClCompile Include="dataSearch.h" />
     <ClCompile Include="dataSort.cpp" />
     <ClCompile Include="dataView.cpp" />
+    <ClCompile Include="deleteData.cpp" />
+    <ClCompile Include="deleteData.h" />
     <ClCompile Include="fileIO.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />

@@ -6,7 +6,7 @@ using namespace std;
 
 void editClient(Client& client) {
     cout << "Editing Client ID: " << client.id << endl;
-
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cout << "Enter new name: "; 
     cin.getline(client.name, 50);
 
@@ -22,7 +22,7 @@ void editClient(Client& client) {
 
 void editEmployee(Employee& employee) {
     cout << "Editing Employee ID: " << employee.id << endl;
-
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cout << "Enter new name: "; 
     cin.getline(employee.name, 50);
 
@@ -41,7 +41,7 @@ void editEmployee(Employee& employee) {
 
 void editAccount(Account& account) {
     cout << "Editing Account ID: " << account.id << endl;
-
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cout << "Enter new number: "; 
     cin >> account.number; cin.ignore();
 
@@ -51,7 +51,7 @@ void editAccount(Account& account) {
 
 void editTransaction(Transaction& transaction) {
     cout << "Editing Transaction ID: " << transaction.id << endl;
-
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cout << "Enter new amount: "; 
     cin >> transaction.amount; cin.ignore();
 
@@ -61,7 +61,7 @@ void editTransaction(Transaction& transaction) {
 
 void editBranch(Branch& branch) {
     cout << "Editing Branch ID: " << branch.id << endl;
-
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cout << "Enter new name: "; 
     cin.getline(branch.name, 50);
 
