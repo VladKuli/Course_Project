@@ -14,6 +14,13 @@ int calculateClientsByLevel(Client* clients, int numClients, ClientLevel level) 
     return count;
 }
 
+int calculateClientsByType(Client* clients, int numClients, ClientType type) {
+    int count = 0;
+    for (int i = 0; i < numClients; i++)
+        if (clients[i].type == type) count++;
+    return count;
+}
+
 // ---------------- EMPLOYEE CALCULATIONS ----------------
 int calculateTotalEmployees(Employee* employees, int numEmployees) {
     return numEmployees;
@@ -38,17 +45,17 @@ int calculateTotalBranches(Branch* branches, int numBranches) {
     return numBranches;
 }
 
-int calculateBranchesByRegion(Branch* branches, int numBranches, BranchRegion region) {
+int calculateBranchesBySize(Branch* branches, int numBranches, BranchSize size) {
     int count = 0;
     for (int i = 0; i < numBranches; i++)
-        if (branches[i].region == region) count++;
+        if (branches[i].size == size) count++;
     return count;
 }
 
-int calculateBranchesByType(Branch* branches, int numBranches, BranchType type) {
+int calculateBranchesByClientCount(Branch* branches, int numBranches, int minClients) {
     int count = 0;
     for (int i = 0; i < numBranches; i++)
-        if (branches[i].type == type) count++;
+        if (branches[i].numClients >= minClients) count++;
     return count;
 }
 
@@ -76,13 +83,6 @@ int calculateTotalTransactions(Transaction* transactions, int numTransactions) {
     return numTransactions;
 }
 
-int calculateTransactionsByType(Transaction* transactions, int numTransactions, TransactionType type) {
-    int count = 0;
-    for (int i = 0; i < numTransactions; i++)
-        if (transactions[i].type == type) count++;
-    return count;
-}
-
 int calculateTransactionsByDate(Transaction* transactions, int numTransactions, time_t date) {
     int count = 0;
     tm* target = localtime(&date);
@@ -96,3 +96,10 @@ int calculateTransactionsByDate(Transaction* transactions, int numTransactions, 
     }
     return count;
 }
+ int calculateTransactionsBySenderAccount(Transaction * transactions, int numTransactions, long senderAccountId) {
+        int count = 0;
+        for (int i = 0; i < numTransactions; i++)
+            if (transactions[i].senderAccountId == senderAccountId) count++;
+        return count;
+ }
+

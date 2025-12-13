@@ -90,8 +90,9 @@ Branch* searchBranchByName(Branch* branches, int numBranches, const char* name) 
     return nullptr;
 }
 
-Branch* searchBranchByManagerId(Branch* branches, int numBranches, long managerId) {
+Branch* searchByAddress(Branch* branches, int numBranches, const char* address) {
     for (int i = 0; i < numBranches; ++i)
-        if (branches[i].managerId == managerId) return &branches[i];
+        if (strcmp(branches[i].address, address) == 0) return &branches[i];
     return nullptr;
 }
+

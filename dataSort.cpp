@@ -53,10 +53,10 @@ void sortEmployeeByLevel(Employee* employees, int numEmployees) {
             }
 }
 
-void sortEmployeeByDepartment(Employee* employees, int numEmployees) {
+void sortEmployeesByRole(Employee* employees, int numEmployees) {
     for (int i = 0; i < numEmployees - 1; i++)
         for (int j = 0; j < numEmployees - i - 1; j++)
-            if (strcmp(employees[j].department, employees[j + 1].department) > 0) {
+            if (employees[j].role > employees[j + 1].role) {
                 Employee tmp = employees[j];
                 employees[j] = employees[j + 1];
                 employees[j + 1] = tmp;
@@ -115,10 +115,10 @@ void sortTransactionsByAmount(Transaction* transactions, int numTransactions) {
             }
 }
 
-void sortTransactionsByType(Transaction* transactions, int numTransactions) {
+void sortTransactionsByPurpose(Transaction* transactions, int numTransactions) {
     for (int i = 0; i < numTransactions - 1; i++)
         for (int j = 0; j < numTransactions - i - 1; j++)
-            if (transactions[j].type > transactions[j + 1].type) {
+            if (strcmp(transactions[j].purpose, transactions[j + 1].purpose) > 0) {
                 Transaction tmp = transactions[j];
                 transactions[j] = transactions[j + 1];
                 transactions[j + 1] = tmp;
@@ -136,20 +136,21 @@ void sortBranchesByName(Branch* branches, int numBranches) {
             }
 }
 
-void sortBranchesByRegion(Branch* branches, int numBranches) {
+
+void sortBranchesBySize(Branch* branches, int numBranches) {
     for (int i = 0; i < numBranches - 1; i++)
         for (int j = 0; j < numBranches - i - 1; j++)
-            if (branches[j].region > branches[j + 1].region) {
+            if (branches[j].size > branches[j + 1].size) {
                 Branch tmp = branches[j];
                 branches[j] = branches[j + 1];
                 branches[j + 1] = tmp;
             }
 }
 
-void sortBranchesBySize(Branch* branches, int numBranches) {
+void sortBranchesByClientCount(Branch* branches, int numBranches) {
     for (int i = 0; i < numBranches - 1; i++)
         for (int j = 0; j < numBranches - i - 1; j++)
-            if (branches[j].size > branches[j + 1].size) {
+            if (branches[j].numClients > branches[j + 1].numClients) {
                 Branch tmp = branches[j];
                 branches[j] = branches[j + 1];
                 branches[j + 1] = tmp;

@@ -7,7 +7,7 @@ enum ClientLevel { REGULAR, PREMIUM, VIP };
 
 struct Client {
     long id;
-    long accountId;
+	long branchId;
     char name[50];
     char address[100];
     char phone[15];

@@ -31,6 +31,6 @@ bool deleteTransactionBySenderAccountId(Transaction*& transactions, int& numTran
 // ---------------- BRANCH DELETE ----------------
 bool deleteBranchById(Branch*& branches, int& numBranches, long id);
 bool deleteBranchByName(Branch*& branches, int& numBranches, const char* name);
-bool deleteBranchByManagerId(Branch*& branches, int& numBranches, long managerId);
+bool deleteBranchByPhone(Branch*& branches, int& numBranches, const char* phone);
 
 #endif

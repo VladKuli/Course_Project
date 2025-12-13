@@ -29,9 +29,6 @@ void editEmployee(Employee& employee) {
     cout << "Enter new position: "; 
     cin.getline(employee.position, 50);
 
-    cout << "Enter new department: "; 
-    cin.getline(employee.department, 50);
-
     cout << "Enter new email: "; 
     cin.getline(employee.email, 50);
 

@@ -3,6 +3,7 @@
 #define ACCOUNT_H
 
 #include "Client.h"
+#include "Transaction.h"
 
 enum AccountType { SAVINGS, CHECKING, CREDIT };
 
@@ -12,7 +13,8 @@ struct Account {
     long clientId;
     AccountType type;
     char currency[4];
+    Transaction* transactions;
     double balance;
 };
 
-#endif
+#endif 

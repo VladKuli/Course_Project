@@ -39,7 +39,6 @@ void handleClientMenu() {
             cout << "Email: "; cin.getline(c.email, 50);
             c.type = INDIVIDUAL;
             c.level = REGULAR;
-            c.accountId = 0;
 
             Client* tmp = new Client[numClients + 1];
             for (int i = 0; i < numClients; i++) tmp[i] = clients[i];
@@ -163,7 +162,6 @@ void handleEmployeeMenu() {
             e.id = numEmployees + 1;
             cout << "Name: "; cin.getline(e.name, 50);
             cout << "Position: "; cin.getline(e.position, 50);
-            cout << "Department: "; cin.getline(e.department, 50);
             cout << "Email: "; cin.getline(e.email, 50);
             cout << "Phone: "; cin.getline(e.phone, 15);
 
@@ -221,7 +219,7 @@ void handleEmployeeMenu() {
             int s; cout << "Sort: 1.Name 2.Level 3.Department: "; cin >> s;
             if (s == 1) sortEmployeesByName(employees, numEmployees);
             else if (s == 2) sortEmployeeByLevel(employees, numEmployees);
-            else if (s == 3) sortEmployeeByDepartment(employees, numEmployees);
+            else if (s == 3) sortEmployeesByRole(employees, numEmployees);
             cout << "Sorted.\n";
             break;
         }
@@ -398,7 +396,6 @@ void handleTransactionMenu() {
             cout << "Amount: "; cin >> t.amount; cin.ignore();
             cout << "Purpose: "; cin.getline(t.purpose, 100);
 
-            t.type = TRANSFER;
 
             Transaction* tmp = new Transaction[numTransactions + 1];
             for (int i = 0; i < numTransactions; i++) tmp[i] = transactions[i];
@@ -450,7 +447,6 @@ void handleTransactionMenu() {
             int s; cout << "Sort: 1.Date 2.Amount 3.Type: "; cin >> s;
             if (s == 1) sortTransactionsByDate(transactions, numTransactions);
             else if (s == 2) sortTransactionsByAmount(transactions, numTransactions);
-            else if (s == 3) sortTransactionsByType(transactions, numTransactions);
             cout << "Sorted.\n";
             break;
         }
@@ -466,8 +462,6 @@ void handleTransactionMenu() {
               // CALC
         case 7:
             cout << "Total: " << calculateTotalTransactions(transactions, numTransactions) << endl;
-            cout << "Transfers: " << calculateTransactionsByType(transactions, numTransactions, TRANSFER) << endl;
-            cout << "Deposits: " << calculateTransactionsByType(transactions, numTransactions, DEPOSIT) << endl;
             break;
 
         case 0: break;
@@ -496,11 +490,7 @@ void handleBranchMenu() {
             cout << "Address: "; cin.getline(b.address, 100);
             cout << "Phone: "; cin.getline(b.phone, 15);
             cout << "Email: "; cin.getline(b.email, 50);
-            b.type = RETAIL;
-            b.region = NORTH;
             b.size = SMALL;
-            b.status = ACTIVE;
-            b.managerId = 0;
             b.numClients = 0;
             b.numEmployees = 0;
 
@@ -542,9 +532,7 @@ void handleBranchMenu() {
                 if (b) viewBranch(*b); else cout << "Not found\n";
             }
             else if (s == 3) {
-                long mid; cout << "Manager ID: "; cin >> mid;
-                Branch* b = searchBranchByManagerId(branches, numBranches, mid);
-                if (b) viewBranch(*b); else cout << "Not found\n";
+               //Need to add 3 option 
             }
             break;
         }
@@ -553,7 +541,7 @@ void handleBranchMenu() {
         case 5: {
             int s; cout << "Sort: 1.Name 2.Region 3.Size: "; cin >> s;
             if (s == 1) sortBranchesByName(branches, numBranches);
-            else if (s == 2) sortBranchesByRegion(branches, numBranches);
+            else if (s == 2) sortBranchesByClientCount(branches, numBranches);
             else if (s == 3) sortBranchesBySize(branches, numBranches);
             cout << "Sorted.\n";
             break;
@@ -570,8 +558,6 @@ void handleBranchMenu() {
               // CALC
         case 7:
             cout << "Total branches: " << calculateTotalBranches(branches, numBranches) << endl;
-            cout << "Retail: " << calculateBranchesByType(branches, numBranches, RETAIL) << endl;
-            cout << "North region: " << calculateBranchesByRegion(branches, numBranches, NORTH) << endl;
             break;
 
         case 0: break;
@@ -602,6 +588,7 @@ int main() {
         case 3: handleAccountMenu(); break;
         case 4: handleTransactionMenu(); break;
         case 5: handleBranchMenu(); break;
+		case 6: viewAllData(); break;
         case 0: cout << "Exiting...\n"; break;
         default: cout << "Invalid\n";
         }

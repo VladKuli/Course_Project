@@ -26,7 +26,6 @@ Transaction* searchTransactionBySenderAccountId(Transaction* transactions, int n
 
 Branch* searchBranchById(Branch* branches, int numBranches, long id);
 Branch* searchBranchByName(Branch* branches, int numBranches, const char* name);
-Branch* searchBranchByManagerId(Branch* branches, int numBranches, long managerId);
-
+Branch* searchByAddress(Branch* branches, int numBranches, const char* address);
 
 #endif

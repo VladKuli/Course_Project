@@ -202,9 +202,9 @@ bool deleteBranchByName(Branch*& branches, int& numBranches, const char* name) {
     return false;
 }
 
-bool deleteBranchByManagerId(Branch*& branches, int& numBranches, long managerId) {
+bool deleteBranchByPhone(Branch*& branches, int& numBranches, const char* phone) {
     for (int i = 0; i < numBranches; i++) {
-        if (branches[i].managerId == managerId) {
+        if (strcmp(branches[i].phone, phone) == 0) {
             Branch* tmp = new Branch[numBranches - 1];
             for (int j = 0, k = 0; j < numBranches; j++) if (j != i) tmp[k++] = branches[j];
             delete[] branches;

@@ -9,7 +9,7 @@ struct Employee {
     long id;
     char name[50];
     char position[50];
-    char department[50];
+    long branchId;
     char email[50];
     char phone[15];
     EmployeeRole role;
