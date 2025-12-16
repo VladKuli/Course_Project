@@ -13,6 +13,19 @@
 
 using namespace std;
 
+// Place this at the top of your file (after includes)
+template<typename T>
+void getValidatedInput(T& value, const char* prompt = "Enter a number: ") {
+    std::cout << prompt;
+    while (!(std::cin >> value)) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input. Please enter a number: ";
+    }
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+
 // ---------------- DYNAMIC ARRAYS ----------------
 Client* clients = nullptr; int numClients = 0;
 Employee* employees = nullptr; int numEmployees = 0;
@@ -129,7 +142,14 @@ void handleClientMenu() {
             cin >> s; cin.ignore();
 
             if (s == 1) {
-                long id; cout << "ID: "; cin >> id;
+                long id;
+                cout << "ID: ";
+                while (!(cin >> id)) {
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    cout << "Invalid input. Please enter a number: ";
+                }
+                cin.ignore();
                 Client* c = searchClientById(clients, numClients, id);
                 if (c) viewClient(*c); else cout << "Not found\n";
             }
@@ -184,7 +204,9 @@ void handleClientMenu() {
                 result = deleteClientByEmail(clients, numClients, email);
             }
 
-            cout << (result ? "Deleted.\n" : "Not found.\n");
+            cout << (result 
+                ? "Deleted.\n" 
+                : "Not found.\n");
             break;
         }
 
@@ -530,15 +552,20 @@ int main() {
     do {
         displayMainMenu();
         cout << "----------------\n";
-        cout << "Your choice:";
-        cin >> choice;
+        cout << "Your choice: \n";
+
+        while (!(cin >> choice)) {
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cout << "\nInvalid input. Please enter a number: ";
+        }
 
         switch (choice) {
         case 1: handleClientMenu(); break;
         case 2: handleEmployeeMenu(); break;
         case 3: handleAccountMenu(); break;
         case 5: handleBranchMenu(); break;
-		case 6: viewAllData(); break;
+        case 6: viewAllData(); break;
         case 0: cout << "Exiting...\n"; break;
         default: cout << "Invalid\n";
         }

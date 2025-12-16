@@ -7,6 +7,14 @@
 using namespace std;
 
 
+extern Client* clients;
+extern int numClients;
+extern Branch* branches;
+extern int numBranches;
+extern Account* accounts;
+extern int numAccounts;
+
+
 void viewClient(const Client& c) {
     cout << "-------------------- Client Information --------------------\n";
     cout << "ID:        " << c.id << "\n";
@@ -64,6 +72,11 @@ void viewBranch(const Branch& b) {
 void viewAllData() {
     cout << "====================== All Clients with Accounts ======================\n\n";
 
+    if (numClients == 0) {
+        cout << "No client data available.\n";
+        return;
+    }
+
     for (int i = 0; i < numClients; i++) {
         const Client& c = clients[i];
         cout << left << setw(10) << "ClientID" << setw(20) << "Name" << setw(25) << "Email"
@@ -73,7 +86,6 @@ void viewAllData() {
             << setw(10) << (c.level == REGULAR ? "Regular" : (c.level == PREMIUM ? "Premium" : "VIP"))
             << "\n";
 
-        // Показать филиал
         Branch* b = searchBranchById(branches, numBranches, c.branchId);
         if (b) {
             cout << "  Branch: " << b->name << ", Address: " << b->address << "\n";
