@@ -22,6 +22,4 @@ void viewEmployee(const Employee& employee);
 void viewAccount(const Account& account);
 void viewBranch(const Branch& branch);
 
-void viewAllData();
-
 #endif

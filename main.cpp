@@ -376,7 +376,6 @@ void handleEmployeeMenu() {
     } while (choice != 0);
 }
 
-
 // =========================================================
 // ACCOUNT MENU
 // =========================================================
@@ -388,32 +387,18 @@ void handleAccountMenu() {
 
         switch (choice) {
 
-            // ADD
-        case 1: {
-            Account a;
-            a.id = numAccounts + 1;
-            cout << "Number: "; cin >> a.number; cin.ignore();
-            cout << "Balance: "; cin >> a.balance;
-            a.clientId = 0;
-
-            Account* tmp = new Account[numAccounts + 1];
-            for (int i = 0; i < numAccounts; i++) tmp[i] = accounts[i];
-            tmp[numAccounts] = a;
-            delete[] accounts;
-            accounts = tmp;
-            numAccounts++;
-
-            cout << "Account added.\n";
-            break;
-        }
-
               // VIEW
-        case 2:
+        case 1:
+
+            if (numAccounts == 0) {
+                cout << "No Accounts data available.\n";
+                return;
+            }
             for (int i = 0; i < numAccounts; i++) viewAccount(accounts[i]);
             break;
 
             // EDIT
-        case 3: {
+        case 2: {
             long id;
             cout << "ID: "; cin >> id;
             Account* a = searchAccountById(accounts, numAccounts, id);
@@ -422,7 +407,7 @@ void handleAccountMenu() {
         }
 
               // SEARCH
-        case 4: {
+        case 3: {
             int s; cout << "Search: 1.ID 2.Number 3.ClientID: "; cin >> s; cin.ignore();
             if (s == 1) {
                 long id; cout << "ID: "; cin >> id;
@@ -446,15 +431,20 @@ void handleAccountMenu() {
         }
 
               // SORT
-        case 5: {
-            int s; cout << "Sort: 1.Balance: "; cin >> s;
+        case 4: {
+            int s;
+            getValidatedInput(s, "Sort: 1.Balance: ");
             if (s == 1) sortAccountsByBalance(accounts, numAccounts);
-            cout << "Sorted.\n";
+
+            cout << "Sorted list:\n";
+            for (int i = 0; i < numAccounts; i++)
+                viewAccount(accounts[i]);
             break;
         }
 
+
               // DELETE
-        case 6: {
+        case 5: {
             int d; cout << "Delete: 1.ID 2.Number: "; cin >> d; cin.ignore();
             bool result = false;
 
@@ -470,9 +460,8 @@ void handleAccountMenu() {
             cout << (result ? "Deleted.\n" : "Not found.\n");
             break;
         }
-
               // CALCULATIONS
-        case 7:
+        case 6:
             cout << "Total accounts: " << calculateTotalAccounts(accounts, numAccounts) << endl;
             break;
 
@@ -482,6 +471,7 @@ void handleAccountMenu() {
     } while (choice != 0);
 }
 
+//todo Add to statistic how many large branches etc
 // =========================================================
 // BRANCH MENU
 // =========================================================
@@ -495,15 +485,26 @@ void handleBranchMenu() {
 
             // ADD
         case 1: {
+
             Branch b;
             b.id = numBranches + 1;
             cout << "Name: "; cin.getline(b.name, 50);
             cout << "Address: "; cin.getline(b.address, 100);
             cout << "Phone: "; cin.getline(b.phone, 15);
             cout << "Email: "; cin.getline(b.email, 50);
-            b.size = SMALL;
+
+            int sizeChoice;
+            getValidatedInput(sizeChoice, "Branch size (1. Small, 2. Medium, 3. Large): ");
+            switch (sizeChoice) {
+            case 1: b.size = SMALL; break;
+            case 2: b.size = MEDIUM; break;
+            case 3: b.size = LARGE; break;
+            default: b.size = SMALL; break;
+            }
+
             b.numClients = 0;
             b.numEmployees = 0;
+
 
             Branch* tmp = new Branch[numBranches + 1];
             for (int i = 0; i < numBranches; i++) tmp[i] = branches[i];
@@ -518,6 +519,12 @@ void handleBranchMenu() {
 
               // VIEW
         case 2:
+
+            if (numBranches == 0) {
+                cout << "No Branches data available.\n";
+                return;
+            }
+
             for (int i = 0; i < numBranches; i++) viewBranch(branches[i]);
             break;
 
@@ -531,7 +538,7 @@ void handleBranchMenu() {
 
               // SEARCH
         case 4: {
-            int s; cout << "Search: 1.ID 2.Name 3.ManagerID: "; cin >> s; cin.ignore();
+            int s; cout << "Search: 1.ID 2.Name"; cin >> s; cin.ignore();
             if (s == 1) {
                 long id; cout << "ID: "; cin >> id;
                 Branch* b = searchBranchById(branches, numBranches, id);
@@ -550,13 +557,17 @@ void handleBranchMenu() {
 
               // SORT
         case 5: {
-            int s; cout << "Sort: 1.Name 2.Region 3.Size: "; cin >> s;
+            int s; cout << "Sort: 1.Name 2.Client count 3.Size: "; cin >> s;
             if (s == 1) sortBranchesByName(branches, numBranches);
-            else if (s == 2) sortBranchesByClientCount(branches, numBranches);
+            else if (s == 2) sortBranchesByClientCount(branches, numBranches,clients, numClients);
             else if (s == 3) sortBranchesBySize(branches, numBranches);
-            cout << "Sorted.\n";
+
+            cout << "\nSorted list:\n";
+            for (int i = 0; i < numBranches; i++)
+                viewBranch(branches[i]);
             break;
         }
+
 
               // DELETE
         case 6: {
@@ -603,8 +614,7 @@ int main() {
         case 1: handleClientMenu(); break;
         case 2: handleEmployeeMenu(); break;
         case 3: handleAccountMenu(); break;
-        case 5: handleBranchMenu(); break;
-        case 6: viewAllData(); break;
+        case 4: handleBranchMenu(); break;
         case 0: cout << "Exiting...\n"; break;
         default: cout << "Invalid\n";
         }

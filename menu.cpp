@@ -15,17 +15,16 @@ void displayMainMenu() {
     cout << endl;
 }
     // ===== ACCOUNT MENU =====
-    void displayAccountMenu() { 
-        cout << endl;
-        cout << "---- Account Menu ----\n";
-        cout << "1. Add Account\n";
-        cout << "2. View All Accounts\n";
-        cout << "3. Edit Account\n";
-        cout << "4. Search Account\n";
-        cout << "5. Sort Accounts\n";
-        cout << "6. Delete Account\n";
-        cout << "7. Statistics\n";
-        cout << "0. Back to Main Menu\n";
+void displayAccountMenu() { 
+    cout << endl;
+    cout << "---- Account Menu ----\n";
+    cout << "1. View All Accounts\n";
+    cout << "2. Edit Account\n";
+    cout << "3. Search Account\n";
+    cout << "4. Sort Accounts\n";
+    cout << "5. Delete Account\n";
+    cout << "6. Statistics\n";
+    cout << "0. Back to Main Menu\n";
 }
 
 
