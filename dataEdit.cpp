@@ -46,16 +46,6 @@ void editAccount(Account& account) {
     cin >> account.balance; cin.ignore();
 }
 
-void editTransaction(Transaction& transaction) {
-    cout << "Editing Transaction ID: " << transaction.id << endl;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cout << "Enter new amount: "; 
-    cin >> transaction.amount; cin.ignore();
-
-    cout << "Enter new purpose: "; 
-    cin.getline(transaction.purpose, 100);
-}
-
 void editBranch(Branch& branch) {
     cout << "Editing Branch ID: " << branch.id << endl;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');

@@ -58,25 +58,6 @@ Account* searchAccountByClientId(Account* accounts, int numAccounts, long client
     return nullptr;
 }
 
-// ---------------- TRANSACTION SEARCH ----------------
-Transaction* searchTransactionById(Transaction* transactions, int numTransactions, long id) {
-    for (int i = 0; i < numTransactions; ++i)
-        if (transactions[i].id == id) return &transactions[i];
-    return nullptr;
-}
-
-Transaction* searchTransactionByPurpose(Transaction* transactions, int numTransactions, const char* purpose) {
-    for (int i = 0; i < numTransactions; ++i)
-        if (strcmp(transactions[i].purpose, purpose) == 0) return &transactions[i];
-    return nullptr;
-}
-
-Transaction* searchTransactionBySenderAccountId(Transaction* transactions, int numTransactions, long senderAccountId) {
-    for (int i = 0; i < numTransactions; ++i)
-        if (transactions[i].senderAccountId == senderAccountId) return &transactions[i];
-    return nullptr;
-}
-
 // ---------------- BRANCH SEARCH ----------------
 Branch* searchBranchById(Branch* branches, int numBranches, long id) {
     for (int i = 0; i < numBranches; ++i)

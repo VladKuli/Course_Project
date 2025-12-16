@@ -78,28 +78,3 @@ int calculateAccountsByCurrency(Account* accounts, int numAccounts, const char* 
     return count;
 }
 
-// ---------------- TRANSACTION CALCULATIONS ----------------
-int calculateTotalTransactions(Transaction* transactions, int numTransactions) {
-    return numTransactions;
-}
-
-int calculateTransactionsByDate(Transaction* transactions, int numTransactions, time_t date) {
-    int count = 0;
-    tm* target = localtime(&date);
-
-    for (int i = 0; i < numTransactions; i++) {
-        tm* t = localtime(&transactions[i].date);
-        if (t->tm_year == target->tm_year &&
-            t->tm_mon == target->tm_mon &&
-            t->tm_mday == target->tm_mday)
-            count++;
-    }
-    return count;
-}
- int calculateTransactionsBySenderAccount(Transaction * transactions, int numTransactions, long senderAccountId) {
-        int count = 0;
-        for (int i = 0; i < numTransactions; i++)
-            if (transactions[i].senderAccountId == senderAccountId) count++;
-        return count;
- }
-

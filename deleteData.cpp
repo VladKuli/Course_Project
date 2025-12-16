@@ -131,49 +131,6 @@ bool deleteAccountByClientId(Account*& accounts, int& numAccounts, long clientId
     return false;
 }
 
-// ---------------- TRANSACTION DELETE ----------------
-bool deleteTransactionById(Transaction*& transactions, int& numTransactions, long id) {
-    for (int i = 0; i < numTransactions; i++) {
-        if (transactions[i].id == id) {
-            Transaction* tmp = new Transaction[numTransactions - 1];
-            for (int j = 0, k = 0; j < numTransactions; j++) if (j != i) tmp[k++] = transactions[j];
-            delete[] transactions;
-            transactions = tmp;
-            numTransactions--;
-            return true;
-        }
-    }
-    return false;
-}
-
-bool deleteTransactionByPurpose(Transaction*& transactions, int& numTransactions, const char* purpose) {
-    for (int i = 0; i < numTransactions; i++) {
-        if (strcmp(transactions[i].purpose, purpose) == 0) {
-            Transaction* tmp = new Transaction[numTransactions - 1];
-            for (int j = 0, k = 0; j < numTransactions; j++) if (j != i) tmp[k++] = transactions[j];
-            delete[] transactions;
-            transactions = tmp;
-            numTransactions--;
-            return true;
-        }
-    }
-    return false;
-}
-
-bool deleteTransactionBySenderAccountId(Transaction*& transactions, int& numTransactions, long senderAccountId) {
-    for (int i = 0; i < numTransactions; i++) {
-        if (transactions[i].senderAccountId == senderAccountId) {
-            Transaction* tmp = new Transaction[numTransactions - 1];
-            for (int j = 0, k = 0; j < numTransactions; j++) if (j != i) tmp[k++] = transactions[j];
-            delete[] transactions;
-            transactions = tmp;
-            numTransactions--;
-            return true;
-        }
-    }
-    return false;
-}
-
 // ---------------- BRANCH DELETE ----------------
 bool deleteBranchById(Branch*& branches, int& numBranches, long id) {
     for (int i = 0; i < numBranches; i++) {

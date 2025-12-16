@@ -5,7 +5,6 @@
 #include "../Course_Project/Client.h"
 #include "../Course_Project/Employee.h"
 #include "../Course_Project/Account.h"
-#include "../Course_Project/Transaction.h"
 #include "../Course_Project/Branch.h"
 #include "../Course_Project/dataCalc.h"
 #include "../Course_Project/dataView.h"
@@ -19,7 +18,6 @@ void displayMainMenu();
 void displayClientMenu();
 void displayEmployeeMenu();
 void displayAccountMenu();
-void displayTransactionMenu();
 void displayBranchMenu();
 
 

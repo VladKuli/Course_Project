@@ -1,7 +1,6 @@
 #include "../Course_Project/Client.h"
 #include "../Course_Project/Employee.h"
 #include "../Course_Project/Account.h"
-#include "../Course_Project/Transaction.h"
 #include "../Course_Project/Branch.h"
 #include <cstdio>
 
@@ -58,15 +57,6 @@ bool loadAccounts(const char* filename, Account** accounts, int* numAccounts) {
 
 bool saveAccounts(const char* filename, Account* accounts, int numAccounts) {
     return saveArray(filename, accounts, numAccounts);
-}
-
-// --------------------- TRANSACTIONS ---------------------
-bool loadTransactions(const char* filename, Transaction** transactions, int* numTransactions) {
-    return loadArray(filename, transactions, numTransactions);
-}
-
-bool saveTransactions(const char* filename, Transaction* transactions, int numTransactions) {
-    return saveArray(filename, transactions, numTransactions);
 }
 
 // --------------------- BRANCHES ---------------------

@@ -5,7 +5,6 @@
 #include "../Course_Project/Client.h"
 #include "../Course_Project/Employee.h"
 #include "../Course_Project/Account.h"
-#include "../Course_Project/Transaction.h"
 #include "../Course_Project/Branch.h"
 
 // ---------------- CLIENT DELETE ----------------
@@ -22,11 +21,6 @@ bool deleteEmployeeByEmail(Employee*& employees, int& numEmployees, const char* 
 bool deleteAccountById(Account*& accounts, int& numAccounts, long id);
 bool deleteAccountByNumber(Account*& accounts, int& numAccounts, int number);
 bool deleteAccountByClientId(Account*& accounts, int& numAccounts, long clientId);
-
-// ---------------- TRANSACTION DELETE ----------------
-bool deleteTransactionById(Transaction*& transactions, int& numTransactions, long id);
-bool deleteTransactionByPurpose(Transaction*& transactions, int& numTransactions, const char* purpose);
-bool deleteTransactionBySenderAccountId(Transaction*& transactions, int& numTransactions, long senderAccountId);
 
 // ---------------- BRANCH DELETE ----------------
 bool deleteBranchById(Branch*& branches, int& numBranches, long id);

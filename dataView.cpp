@@ -16,9 +16,6 @@ void viewEmployee(const Employee& e) {
 void viewAccount(const Account& a) {
     cout << "Account ID: " << a.id << ", Number: " << a.number << ", Balance: " << a.balance << "\n";
 }
-void viewTransaction(const Transaction& t) {
-    cout << "Transaction ID: " << t.id << ", Amount: " << t.amount << ", Purpose: " << t.purpose << "\n";
-}
 void viewBranch(const Branch& b) {
     cout << "Branch ID: " << b.id << ", Name: " << b.name << ", Address: " << b.address << "\n";
 }
@@ -49,16 +46,6 @@ void viewAllData() {
                     << setw(10) << "Balance" << setw(10) << "Currency" << setw(10) << "Type" << "\n";
                 cout << "  " << setw(10) << a.id << setw(15) << a.number << setw(10) << a.balance
                     << setw(10) << a.currency << setw(10) << (a.type == SAVINGS ? "Savings" : "Checking") << "\n";
-
-                // Показать транзакции
-                for (int k = 0; k < numTransactions; k++) {
-                    const Transaction& t = transactions[k];
-                    if (t.senderAccountId == a.number || t.recipientAccountId == a.number) {
-                        cout << "    " << left << setw(15) << "TransactionID" << setw(10) << "Amount"
-                            << setw(50) << "Purpose" << "\n";
-                        cout << "    " << setw(15) << t.id << setw(10) << t.amount << setw(50) << t.purpose << "\n";
-                    }
-                }
             }
         }
         cout << "--------------------------------------------------------------------------------------\n";

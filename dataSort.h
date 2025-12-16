@@ -5,7 +5,6 @@
 #include "../Course_Project/Client.h"
 #include "../Course_Project/Employee.h"
 #include "../Course_Project/Account.h"
-#include "../Course_Project/Transaction.h"
 #include "../Course_Project/Branch.h"
 
 void sortClientsByName(Client* clients, int numClients);
@@ -19,11 +18,6 @@ void sortEmployeesByRole(Employee* employees, int numEmployees);
 void sortAccountsByBalance(Account* accounts, int numAccounts);
 void sortAccountsByType(Account* accounts, int numAccounts);
 void sortAccountsByCurrency(Account* accounts, int numAccounts);
-
-void sortTransactionsByDate(Transaction* transactions, int numTransactions);
-void sortTransactionsByAmount(Transaction* transactions, int numTransactions);
-void sortTransactionsByPurpose(Transaction* transactions, int numTransactions);
-//Find 3 option to sort transactions
 
 void sortBranchesByName(Branch* branches, int numBranches);
 void sortBranchesBySize(Branch* branches, int numBranches);

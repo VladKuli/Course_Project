@@ -56,20 +56,6 @@ void displayAccountMenu() {
     cout << "0. Back to Main Menu\n";
 }
 
-// ===== TRANSACTION MENU =====
-void displayTransactionMenu() {
-    cout << endl;
-    cout << "---- Transaction Menu ----\n";
-    cout << "1. Add Transaction\n";
-    cout << "2. View All Transactions\n";
-    cout << "3. Edit Transaction\n";
-    cout << "4. Search Transaction\n";
-    cout << "5. Sort Transactions\n";
-    cout << "6. Delete Transaction\n";
-    cout << "7. Statistics\n";
-    cout << "0. Back to Main Menu\n";
-}
-
 // ===== BRANCH MENU =====
 void displayBranchMenu() {
     cout << endl;

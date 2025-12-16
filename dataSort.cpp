@@ -94,37 +94,6 @@ void sortAccountsByCurrency(Account* accounts, int numAccounts) {
             }
 }
 
-// ---------------- TRANSACTION SORT ----------------
-void sortTransactionsByDate(Transaction* transactions, int numTransactions) {
-    for (int i = 0; i < numTransactions - 1; i++)
-        for (int j = 0; j < numTransactions - i - 1; j++)
-            if (transactions[j].date > transactions[j + 1].date) {
-                Transaction tmp = transactions[j];
-                transactions[j] = transactions[j + 1];
-                transactions[j + 1] = tmp;
-            }
-}
-
-void sortTransactionsByAmount(Transaction* transactions, int numTransactions) {
-    for (int i = 0; i < numTransactions - 1; i++)
-        for (int j = 0; j < numTransactions - i - 1; j++)
-            if (transactions[j].amount > transactions[j + 1].amount) {
-                Transaction tmp = transactions[j];
-                transactions[j] = transactions[j + 1];
-                transactions[j + 1] = tmp;
-            }
-}
-
-void sortTransactionsByPurpose(Transaction* transactions, int numTransactions) {
-    for (int i = 0; i < numTransactions - 1; i++)
-        for (int j = 0; j < numTransactions - i - 1; j++)
-            if (strcmp(transactions[j].purpose, transactions[j + 1].purpose) > 0) {
-                Transaction tmp = transactions[j];
-                transactions[j] = transactions[j + 1];
-                transactions[j + 1] = tmp;
-            }
-}
-
 // ---------------- BRANCH SORT ----------------
 void sortBranchesByName(Branch* branches, int numBranches) {
     for (int i = 0; i < numBranches - 1; i++)

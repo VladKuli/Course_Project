@@ -17,7 +17,6 @@ using namespace std;
 Client* clients = nullptr; int numClients = 0;
 Employee* employees = nullptr; int numEmployees = 0;
 Account* accounts = nullptr; int numAccounts = 0;
-Transaction* transactions = nullptr; int numTransactions = 0;
 Branch* branches = nullptr; int numBranches = 0;
 
 // ============ CLIENT MENU ============
@@ -33,10 +32,18 @@ void handleClientMenu() {
         case 1: {
             Client c;
             c.id = numClients + 1;
-            cout << "Name: "; cin.getline(c.name, 50);
-            cout << "Address: "; cin.getline(c.address, 100);
-            cout << "Phone: "; cin.getline(c.phone, 15);
-            cout << "Email: "; cin.getline(c.email, 50);
+            cout << "Name: ";
+            cin.getline(c.name, 50);
+
+            cout << "Address: ";
+            cin.getline(c.address, 100);
+
+            cout << "Phone: ";
+            cin.getline(c.phone, 15);
+
+            cout << "Email: ";
+            cin.getline(c.email, 50);
+
             c.type = INDIVIDUAL;
             c.level = REGULAR;
 
@@ -69,7 +76,9 @@ void handleClientMenu() {
 
               // SEARCH
         case 4: {
-            int s; cout << "Search: 1.ID 2.Name 3.Email: "; cin >> s; cin.ignore();
+            int s; cout << "Search: 1.ID 2.Name 3.Email: ";
+            cin >> s; cin.ignore();
+
             if (s == 1) {
                 long id; cout << "ID: "; cin >> id;
                 Client* c = searchClientById(clients, numClients, id);
@@ -373,104 +382,6 @@ void handleAccountMenu() {
     } while (choice != 0);
 }
 
-
-// =========================================================
-// TRANSACTION MENU
-// =========================================================
-void handleTransactionMenu() {
-    int choice;
-    do {
-        displayTransactionMenu();
-        cout << "Choice: "; cin >> choice; cin.ignore();
-
-        switch (choice) {
-
-            // ADD
-        case 1: {
-            Transaction t;
-            t.id = numTransactions + 1;
-            t.date = time(nullptr);
-
-            cout << "Sender ID: "; cin >> t.senderAccountId;
-            cout << "Recipient ID: "; cin >> t.recipientAccountId;
-            cout << "Amount: "; cin >> t.amount; cin.ignore();
-            cout << "Purpose: "; cin.getline(t.purpose, 100);
-
-
-            Transaction* tmp = new Transaction[numTransactions + 1];
-            for (int i = 0; i < numTransactions; i++) tmp[i] = transactions[i];
-            tmp[numTransactions] = t;
-            delete[] transactions;
-            transactions = tmp;
-            numTransactions++;
-
-            cout << "Transaction added.\n";
-            break;
-        }
-
-              // VIEW ALL
-        case 2:
-            for (int i = 0; i < numTransactions; i++) viewTransaction(transactions[i]);
-            break;
-
-            // EDIT
-        case 3: {
-            long id; cout << "ID: "; cin >> id;
-            Transaction* t = searchTransactionById(transactions, numTransactions, id);
-            if (t) editTransaction(*t); else cout << "Not found\n";
-            break;
-        }
-
-              // SEARCH
-        case 4: {
-            int s; cout << "Search: 1.ID 2.Purpose 3.SenderID: "; cin >> s; cin.ignore();
-            if (s == 1) {
-                long id; cout << "ID: "; cin >> id;
-                Transaction* t = searchTransactionById(transactions, numTransactions, id);
-                if (t) viewTransaction(*t); else cout << "Not found\n";
-            }
-            else if (s == 2) {
-                char purpose[100]; cout << "Purpose: "; cin.getline(purpose, 100);
-                Transaction* t = searchTransactionByPurpose(transactions, numTransactions, purpose);
-                if (t) viewTransaction(*t); else cout << "Not found\n";
-            }
-            else if (s == 3) {
-                long sid; cout << "SenderID: "; cin >> sid;
-                Transaction* t = searchTransactionBySenderAccountId(transactions, numTransactions, sid);
-                if (t) viewTransaction(*t); else cout << "Not found\n";
-            }
-            break;
-        }
-
-              // SORT
-        case 5: {
-            int s; cout << "Sort: 1.Date 2.Amount 3.Type: "; cin >> s;
-            if (s == 1) sortTransactionsByDate(transactions, numTransactions);
-            else if (s == 2) sortTransactionsByAmount(transactions, numTransactions);
-            cout << "Sorted.\n";
-            break;
-        }
-
-              // DELETE
-        case 6: {
-            long id; cout << "ID: "; cin >> id;
-            bool result = deleteTransactionById(transactions, numTransactions, id);
-            cout << (result ? "Deleted.\n" : "Not found.\n");
-            break;
-        }
-
-              // CALC
-        case 7:
-            cout << "Total: " << calculateTotalTransactions(transactions, numTransactions) << endl;
-            break;
-
-        case 0: break;
-        default: cout << "Invalid\n";
-        }
-    } while (choice != 0);
-}
-
-
 // =========================================================
 // BRANCH MENU
 // =========================================================
@@ -574,7 +485,6 @@ int main() {
     loadClients("clients.dat", &clients, &numClients);
     loadEmployees("employees.dat", &employees, &numEmployees);
     loadAccounts("accounts.dat", &accounts, &numAccounts);
-    loadTransactions("transactions.dat", &transactions, &numTransactions);
     loadBranches("branches.dat", &branches, &numBranches);
 
     int choice;
@@ -586,7 +496,6 @@ int main() {
         case 1: handleClientMenu(); break;
         case 2: handleEmployeeMenu(); break;
         case 3: handleAccountMenu(); break;
-        case 4: handleTransactionMenu(); break;
         case 5: handleBranchMenu(); break;
 		case 6: viewAllData(); break;
         case 0: cout << "Exiting...\n"; break;
@@ -597,13 +506,11 @@ int main() {
     saveClients("clients.dat", clients, numClients);
     saveEmployees("employees.dat", employees, numEmployees);
     saveAccounts("accounts.dat", accounts, numAccounts);
-    saveTransactions("transactions.dat", transactions, numTransactions);
     saveBranches("branches.dat", branches, numBranches);
 
     delete[] clients;
     delete[] employees;
     delete[] accounts;
-    delete[] transactions;
     delete[] branches;
 
     return 0;

@@ -39,9 +39,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Transaction.h">
-      <Filter>Header Files\models</Filter>
-    </ClCompile>
     <ClCompile Include="dataCalc.h">
       <Filter>Header Files\services</Filter>
     </ClCompile>
