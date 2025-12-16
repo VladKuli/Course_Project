@@ -59,9 +59,37 @@ void viewClient(const Client& c) {
 
     cout << "-----------------------------------------------------------\n";
 }
+//TODO FIX SORTING (ADD ADMIN IN STATISTICS TOO)
 void viewEmployee(const Employee& e) {
-    cout << "Employee ID: " << e.id << ", Name: " << e.name << ", Position: " << e.position << "\n";
+    cout << "-------------------- Employee Information --------------------\n";
+    cout << "ID:        " << e.id << "\n";
+    cout << "Name:      " << e.name << "\n";
+    cout << "Position:  " << e.position << "\n";
+    cout << "Branch ID: " << e.branchId << "\n";
+    cout << "Email:     " << e.email << "\n";
+    cout << "Phone:     " << e.phone << "\n";
+    cout << "Role:      ";
+    switch (e.role) {
+    case TELLER:  cout << "Teller"; break;
+    case MANAGER: cout << "Manager"; break;
+    case ADMIN:   cout << "Admin"; break;
+    default:      cout << "Unknown"; break;
+    }
+    cout << "\n";
+
+    // Show Branch info
+    Branch* b = searchBranchById(branches, numBranches, e.branchId);
+    if (b) {
+        cout << "Branch:    " << b->name << " (ID: " << b->id << ")\n";
+        cout << "           " << b->address << ", Phone: " << b->phone << ", Email: " << b->email << "\n";
+    }
+    else {
+        cout << "Branch:    Not found\n";
+    }
+
+    cout << "-------------------------------------------------------------\n";
 }
+
 void viewAccount(const Account& a) {
     cout << "Account ID: " << a.id << ", Number: " << a.number << ", Balance: " << a.balance << "\n";
 }
@@ -71,11 +99,6 @@ void viewBranch(const Branch& b) {
 
 void viewAllData() {
     cout << "====================== All Clients with Accounts ======================\n\n";
-
-    if (numClients == 0) {
-        cout << "No client data available.\n";
-        return;
-    }
 
     for (int i = 0; i < numClients; i++) {
         const Client& c = clients[i];

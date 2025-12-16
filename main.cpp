@@ -122,6 +122,10 @@ void handleClientMenu() {
 
               // VIEW ALL
         case 2:
+            if (numClients == 0) {
+                cout << "No client data available.\n";
+                return;
+            }
             for (int i = 0; i < numClients; i++)
                 viewClient(clients[i]);
             break;
@@ -238,14 +242,36 @@ void handleEmployeeMenu() {
 
             // ADD
         case 1: {
+            if (numBranches == 0) {
+                cout << "No branches available. Please add a branch first.\n";
+                break;
+            }
+
             Employee e;
             e.id = numEmployees + 1;
+
+            // Select branch
+            cout << "Available branches:\n";
+            for (int i = 0; i < numBranches; ++i) {
+                cout << "  " << branches[i].id << ". " << branches[i].name << " (" << branches[i].address << ")\n";
+            }
+            long branchId;
+            getValidatedInput(branchId, "Enter branch ID for this employee: ");
+            e.branchId = branchId;
+
             cout << "Name: "; cin.getline(e.name, 50);
             cout << "Position: "; cin.getline(e.position, 50);
             cout << "Email: "; cin.getline(e.email, 50);
             cout << "Phone: "; cin.getline(e.phone, 15);
 
-            e.role = TELLER;
+            int roleChoice;
+            getValidatedInput(roleChoice, "Role (1. Teller, 2. Manager, 3. Admin): ");
+            switch (roleChoice) {
+            case 1: e.role = TELLER; break;
+            case 2: e.role = MANAGER; break;
+            case 3: e.role = ADMIN; break;
+            default: e.role = TELLER; break;
+            }
 
             Employee* tmp = new Employee[numEmployees + 1];
             for (int i = 0; i < numEmployees; i++) tmp[i] = employees[i];
@@ -258,8 +284,14 @@ void handleEmployeeMenu() {
             break;
         }
 
+
               // VIEW ALL
         case 2:
+            if (numEmployees == 0) {
+                cout << "No employees data available.\n";
+                return;
+            }
+
             for (int i = 0; i < numEmployees; i++) viewEmployee(employees[i]);
             break;
 
@@ -295,12 +327,17 @@ void handleEmployeeMenu() {
 
               // SORT
         case 5: {
-            int s; cout << "Sort: 1.Name 2.Role: "; cin >> s;
+            int s;
+            getValidatedInput(s, "Sort: 1.Name 2.Role: ");
             if (s == 1) sortEmployeesByName(employees, numEmployees);
-            else if (s == 3) sortEmployeesByRole(employees, numEmployees);
-            cout << "Sorted.\n";
+            else if (s == 2) sortEmployeesByRole(employees, numEmployees);
+
+            cout << "Sorted list:\n";
+            for (int i = 0; i < numEmployees; i++)
+                viewEmployee(employees[i]);
             break;
         }
+
 
               // DELETE
         case 6: {
@@ -324,12 +361,14 @@ void handleEmployeeMenu() {
             break;
         }
 
-              // CALCULATIONS
+        // CALCULATIONS
         case 7:
             cout << "Total employees: " << calculateTotalEmployees(employees, numEmployees) << endl;
             cout << "Managers: " << calculateEmployeesByRole(employees, numEmployees, MANAGER) << endl;
-            cout << "Telllers: " << calculateEmployeesByRole(employees, numEmployees, TELLER) << endl;
+            cout << "Tellers: " << calculateEmployeesByRole(employees, numEmployees, TELLER) << endl;
+            cout << "Admins: " << calculateEmployeesByRole(employees, numEmployees, ADMIN) << endl;
             break;
+
 
         case 0: break;
         default: cout << "Invalid\n";

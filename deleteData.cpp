@@ -48,18 +48,23 @@ bool deleteClientByEmail(Client*& clients, int& numClients, const char* email) {
 
 // ---------------- EMPLOYEE DELETE ----------------
 bool deleteEmployeeById(Employee*& employees, int& numEmployees, long id) {
-    for (int i = 0; i < numEmployees; i++) {
+    for (int i = 0; i < numEmployees; ++i) {
         if (employees[i].id == id) {
-            Employee* tmp = new Employee[numEmployees - 1];
-            for (int j = 0, k = 0; j < numEmployees; j++) if (j != i) tmp[k++] = employees[j];
+            for (int j = i; j < numEmployees - 1; ++j) {
+                employees[j] = employees[j + 1];
+            }
+            numEmployees--;
+            // Optionally shrink the array
+            Employee* tmp = new Employee[numEmployees];
+            for (int k = 0; k < numEmployees; ++k) tmp[k] = employees[k];
             delete[] employees;
             employees = tmp;
-            numEmployees--;
             return true;
         }
     }
     return false;
 }
+
 
 bool deleteEmployeeByName(Employee*& employees, int& numEmployees, const char* name) {
     for (int i = 0; i < numEmployees; i++) {
