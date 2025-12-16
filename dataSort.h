@@ -12,12 +12,9 @@ void sortClientByPhone(Client* clients, int numClients);
 void sortClientByEmail(Client* clients, int numClients);
 
 void sortEmployeesByName(Employee* employees, int numEmployees);
-void sortEmployeeByLevel(Employee* employees, int numEmployees);
 void sortEmployeesByRole(Employee* employees, int numEmployees);
 
 void sortAccountsByBalance(Account* accounts, int numAccounts);
-void sortAccountsByType(Account* accounts, int numAccounts);
-void sortAccountsByCurrency(Account* accounts, int numAccounts);
 
 void sortBranchesByName(Branch* branches, int numBranches);
 void sortBranchesBySize(Branch* branches, int numBranches);

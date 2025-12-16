@@ -5,14 +5,30 @@ using namespace std;
 // ===== MAIN MENU =====
 void displayMainMenu() {
     cout << endl;
-    cout << "==== Main Menu ====\n";
+    cout << "MAIN MENU\n";
+    cout << "----------------\n";
     cout << "1. Clients\n";
     cout << "2. Employees\n";
     cout << "3. Accounts\n";
-    cout << "4. Transactions\n";
-    cout << "5. Branches\n";
+    cout << "4. Branches\n";
     cout << "0. Exit\n";
+    cout << endl;
 }
+    // ===== ACCOUNT MENU =====
+    void displayAccountMenu() { 
+        cout << endl;
+        cout << "---- Account Menu ----\n";
+        cout << "1. Add Account\n";
+        cout << "2. View All Accounts\n";
+        cout << "3. Edit Account\n";
+        cout << "4. Search Account\n";
+        cout << "5. Sort Accounts\n";
+        cout << "6. Delete Account\n";
+        cout << "7. Statistics\n";
+        cout << "0. Back to Main Menu\n";
+}
+
+
 
 // ===== CLIENT MENU =====
 void displayClientMenu() {
@@ -38,20 +54,6 @@ void displayEmployeeMenu() {
     cout << "4. Search Employee\n";
     cout << "5. Sort Employees\n";
     cout << "6. Delete Employee\n";
-    cout << "7. Statistics\n";
-    cout << "0. Back to Main Menu\n";
-}
-
-// ===== ACCOUNT MENU =====
-void displayAccountMenu() {
-    cout << endl;
-    cout << "---- Account Menu ----\n";
-    cout << "1. Add Account\n";
-    cout << "2. View All Accounts\n";
-    cout << "3. Edit Account\n";
-    cout << "4. Search Account\n";
-    cout << "5. Sort Accounts\n";
-    cout << "6. Delete Account\n";
     cout << "7. Statistics\n";
     cout << "0. Back to Main Menu\n";
 }

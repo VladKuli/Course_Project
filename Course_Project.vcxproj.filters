@@ -34,6 +34,9 @@
     <Filter Include="Source Files\ui">
       <UniqueIdentifier>{ee502c22-57a8-4873-ab53-82e8800156df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NewFilter1">
+      <UniqueIdentifier>{bce5071c-4453-466c-9522-3c01afd04bb6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

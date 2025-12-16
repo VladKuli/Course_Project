@@ -43,16 +43,6 @@ void sortEmployeesByName(Employee* employees, int numEmployees) {
             }
 }
 
-void sortEmployeeByLevel(Employee* employees, int numEmployees) {
-    for (int i = 0; i < numEmployees - 1; i++)
-        for (int j = 0; j < numEmployees - i - 1; j++)
-            if (employees[j].level > employees[j + 1].level) {
-                Employee tmp = employees[j];
-                employees[j] = employees[j + 1];
-                employees[j + 1] = tmp;
-            }
-}
-
 void sortEmployeesByRole(Employee* employees, int numEmployees) {
     for (int i = 0; i < numEmployees - 1; i++)
         for (int j = 0; j < numEmployees - i - 1; j++)
@@ -68,26 +58,6 @@ void sortAccountsByBalance(Account* accounts, int numAccounts) {
     for (int i = 0; i < numAccounts - 1; i++)
         for (int j = 0; j < numAccounts - i - 1; j++)
             if (accounts[j].balance > accounts[j + 1].balance) {
-                Account tmp = accounts[j];
-                accounts[j] = accounts[j + 1];
-                accounts[j + 1] = tmp;
-            }
-}
-
-void sortAccountsByType(Account* accounts, int numAccounts) {
-    for (int i = 0; i < numAccounts - 1; i++)
-        for (int j = 0; j < numAccounts - i - 1; j++)
-            if (accounts[j].type > accounts[j + 1].type) {
-                Account tmp = accounts[j];
-                accounts[j] = accounts[j + 1];
-                accounts[j + 1] = tmp;
-            }
-}
-
-void sortAccountsByCurrency(Account* accounts, int numAccounts) {
-    for (int i = 0; i < numAccounts - 1; i++)
-        for (int j = 0; j < numAccounts - i - 1; j++)
-            if (strcmp(accounts[j].currency, accounts[j + 1].currency) > 0) {
                 Account tmp = accounts[j];
                 accounts[j] = accounts[j + 1];
                 accounts[j + 1] = tmp;

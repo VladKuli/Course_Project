@@ -8,7 +8,48 @@ using namespace std;
 
 
 void viewClient(const Client& c) {
-    cout << "Client ID: " << c.id << ", Name: " << c.name << ", Email: " << c.email << "\n";
+    cout << "-------------------- Client Information --------------------\n";
+    cout << "ID:        " << c.id << "\n";
+    cout << "Name:      " << c.name << "\n";
+    cout << "Address:   " << c.address << "\n";
+    cout << "Phone:     " << c.phone << "\n";
+    cout << "Email:     " << c.email << "\n";
+    cout << "Type:      " << (c.type == INDIVIDUAL ? "Individual" : "Company") << "\n";
+    cout << "Level:     ";
+    switch (c.level) {
+    case REGULAR: cout << "Regular"; break;
+    case PREMIUM: cout << "Premium"; break;
+    case VIP:     cout << "VIP"; break;
+    default:      cout << "Unknown"; break;
+    }
+    cout << "\n";
+
+    // Show Branch info
+    Branch* b = searchBranchById(branches, numBranches, c.branchId);
+    if (b) {
+        cout << "Branch:    " << b->name << " (ID: " << b->id << ")\n";
+        cout << "           " << b->address << ", Phone: " << b->phone << ", Email: " << b->email << "\n";
+    }
+    else {
+        cout << "Branch:    Not found\n";
+    }
+
+    // Show Account info
+    bool foundAccount = false;
+    for (int i = 0; i < numAccounts; ++i) {
+        if (accounts[i].clientId == c.id) {
+            cout << "Account:   ID: " << accounts[i].id
+                << ", Number: " << accounts[i].number
+                << ", Balance: " << accounts[i].balance << "\n";
+            foundAccount = true;
+            break;
+        }
+    }
+    if (!foundAccount) {
+        cout << "Account:   Not found\n";
+    }
+
+    cout << "-----------------------------------------------------------\n";
 }
 void viewEmployee(const Employee& e) {
     cout << "Employee ID: " << e.id << ", Name: " << e.name << ", Position: " << e.position << "\n";
@@ -21,7 +62,7 @@ void viewBranch(const Branch& b) {
 }
 
 void viewAllData() {
-    cout << "====================== All Clients with Accounts and Transactions ======================\n\n";
+    cout << "====================== All Clients with Accounts ======================\n\n";
 
     for (int i = 0; i < numClients; i++) {
         const Client& c = clients[i];
@@ -37,33 +78,5 @@ void viewAllData() {
         if (b) {
             cout << "  Branch: " << b->name << ", Address: " << b->address << "\n";
         }
-
-        // Показать счета клиента
-        for (int j = 0; j < numAccounts; j++) {
-            const Account& a = accounts[j];
-            if (a.clientId == c.id) {
-                cout << "  " << left << setw(10) << "AccountID" << setw(15) << "Number"
-                    << setw(10) << "Balance" << setw(10) << "Currency" << setw(10) << "Type" << "\n";
-                cout << "  " << setw(10) << a.id << setw(15) << a.number << setw(10) << a.balance
-                    << setw(10) << a.currency << setw(10) << (a.type == SAVINGS ? "Savings" : "Checking") << "\n";
-            }
-        }
-        cout << "--------------------------------------------------------------------------------------\n";
-    }
-
-    // Сотрудники по филиалам
-    cout << "\n====================== Employees by Branch ======================\n\n";
-    for (int i = 0; i < numBranches; i++) {
-        const Branch& b = branches[i];
-        cout << "Branch: " << b.name << " (ID: " << b.id << ")\n";
-        cout << left << setw(10) << "EmpID" << setw(20) << "Name" << setw(15) << "Position" << setw(10) << "Level" << "\n";
-        for (int j = 0; j < numEmployees; j++) {
-            const Employee& e = employees[j];
-            if (e.branchId == b.id) {
-                cout << setw(10) << e.id << setw(20) << e.name << setw(15) << e.position
-                    << setw(10) << (e.level == JUNIOR ? "Junior" : e.level == MID ? "Mid" : "Senior") << "\n";
-            }
-        }
-        cout << "------------------------------------------------------\n";
     }
 }

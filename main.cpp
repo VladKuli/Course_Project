@@ -30,8 +30,24 @@ void handleClientMenu() {
 
             // ADD
         case 1: {
+            if (numBranches == 0) {
+                cout << "No branches available. Please add a branch first.\n";
+                break;
+            }
+
             Client c;
             c.id = numClients + 1;
+
+            // Select branch
+            cout << "Available branches:\n";
+            for (int i = 0; i < numBranches; ++i) {
+                cout << "  " << branches[i].id << ". " << branches[i].name << " (" << branches[i].address << ")\n";
+            }
+            cout << "Enter branch ID for this client: ";
+            long branchId;
+            cin >> branchId; cin.ignore();
+            c.branchId = branchId;
+
             cout << "Name: ";
             cin.getline(c.name, 50);
 
@@ -44,8 +60,23 @@ void handleClientMenu() {
             cout << "Email: ";
             cin.getline(c.email, 50);
 
-            c.type = INDIVIDUAL;
-            c.level = REGULAR;
+            cout << "Type of the client (1. Individual, 2. Company): ";
+            int typeChoice;
+            cin >> typeChoice; cin.ignore();
+            if (typeChoice == 1)
+                c.type = INDIVIDUAL;
+            else
+                c.type = COMPANY;
+
+            cout << "Client level (1. Regular, 2. Premium, 3. VIP): ";
+            int levelChoice;
+            cin >> levelChoice; cin.ignore();
+            if (levelChoice == 1)
+                c.level = REGULAR;
+            else if (levelChoice == 2)
+                c.level = PREMIUM;
+            else
+                c.level = VIP;
 
             Client* tmp = new Client[numClients + 1];
             for (int i = 0; i < numClients; i++) tmp[i] = clients[i];
@@ -55,6 +86,24 @@ void handleClientMenu() {
             numClients++;
 
             cout << "Client added.\n";
+
+            Account a;
+            a.id = numAccounts + 1;
+            a.clientId = c.id;
+            cout << "Create an account for this client.\n";
+            cout << "Account number: ";
+            cin >> a.number; cin.ignore();
+            cout << "Initial balance: ";
+            cin >> a.balance; cin.ignore();
+
+            Account* atmp = new Account[numAccounts + 1];
+            for (int i = 0; i < numAccounts; i++) atmp[i] = accounts[i];
+            atmp[numAccounts] = a;
+            delete[] accounts;
+            accounts = atmp;
+            numAccounts++;
+            cout << "Account created and linked to client.\n";
+
             break;
         }
 
@@ -175,7 +224,6 @@ void handleEmployeeMenu() {
             cout << "Phone: "; cin.getline(e.phone, 15);
 
             e.role = TELLER;
-            e.level = JUNIOR;
 
             Employee* tmp = new Employee[numEmployees + 1];
             for (int i = 0; i < numEmployees; i++) tmp[i] = employees[i];
@@ -225,9 +273,8 @@ void handleEmployeeMenu() {
 
               // SORT
         case 5: {
-            int s; cout << "Sort: 1.Name 2.Level 3.Department: "; cin >> s;
+            int s; cout << "Sort: 1.Name 2.Role: "; cin >> s;
             if (s == 1) sortEmployeesByName(employees, numEmployees);
-            else if (s == 2) sortEmployeeByLevel(employees, numEmployees);
             else if (s == 3) sortEmployeesByRole(employees, numEmployees);
             cout << "Sorted.\n";
             break;
@@ -260,7 +307,6 @@ void handleEmployeeMenu() {
             cout << "Total employees: " << calculateTotalEmployees(employees, numEmployees) << endl;
             cout << "Managers: " << calculateEmployeesByRole(employees, numEmployees, MANAGER) << endl;
             cout << "Telllers: " << calculateEmployeesByRole(employees, numEmployees, TELLER) << endl;
-            cout << "Senior lvl: " << calculateEmployeesByLevel(employees, numEmployees, SENIOR) << endl;
             break;
 
         case 0: break;
@@ -286,10 +332,8 @@ void handleAccountMenu() {
             Account a;
             a.id = numAccounts + 1;
             cout << "Number: "; cin >> a.number; cin.ignore();
-            cout << "Currency: "; cin.getline(a.currency, 10);
             cout << "Balance: "; cin >> a.balance;
             a.clientId = 0;
-            a.type = SAVINGS;
 
             Account* tmp = new Account[numAccounts + 1];
             for (int i = 0; i < numAccounts; i++) tmp[i] = accounts[i];
@@ -342,10 +386,8 @@ void handleAccountMenu() {
 
               // SORT
         case 5: {
-            int s; cout << "Sort: 1.Balance 2.Type 3.Currency: "; cin >> s;
+            int s; cout << "Sort: 1.Balance: "; cin >> s;
             if (s == 1) sortAccountsByBalance(accounts, numAccounts);
-            else if (s == 2) sortAccountsByType(accounts, numAccounts);
-            else if (s == 3) sortAccountsByCurrency(accounts, numAccounts);
             cout << "Sorted.\n";
             break;
         }
@@ -371,9 +413,6 @@ void handleAccountMenu() {
               // CALCULATIONS
         case 7:
             cout << "Total accounts: " << calculateTotalAccounts(accounts, numAccounts) << endl;
-            cout << "Savings: " << calculateAccountsByType(accounts, numAccounts, SAVINGS) << endl;
-            cout << "Checking: " << calculateAccountsByType(accounts, numAccounts, CHECKING) << endl;
-            cout << "USD accounts: " << calculateAccountsByCurrency(accounts, numAccounts, "USD") << endl;
             break;
 
         case 0: break;
@@ -490,7 +529,9 @@ int main() {
     int choice;
     do {
         displayMainMenu();
-        cout << "Choice: "; cin >> choice;
+        cout << "----------------\n";
+        cout << "Your choice:";
+        cin >> choice;
 
         switch (choice) {
         case 1: handleClientMenu(); break;

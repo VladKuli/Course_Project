@@ -33,13 +33,6 @@ int calculateEmployeesByRole(Employee* employees, int numEmployees, EmployeeRole
     return count;
 }
 
-int calculateEmployeesByLevel(Employee* employees, int numEmployees, EmployeeLevel level) {
-    int count = 0;
-    for (int i = 0; i < numEmployees; i++)
-        if (employees[i].level == level) count++;
-    return count;
-}
-
 // ---------------- BRANCH CALCULATIONS ----------------
 int calculateTotalBranches(Branch* branches, int numBranches) {
     return numBranches;
@@ -62,19 +55,5 @@ int calculateBranchesByClientCount(Branch* branches, int numBranches, int minCli
 // ---------------- ACCOUNT CALCULATIONS ----------------
 int calculateTotalAccounts(Account* accounts, int numAccounts) {
     return numAccounts;
-}
-
-int calculateAccountsByType(Account* accounts, int numAccounts, AccountType type) {
-    int count = 0;
-    for (int i = 0; i < numAccounts; i++)
-        if (accounts[i].type == type) count++;
-    return count;
-}
-
-int calculateAccountsByCurrency(Account* accounts, int numAccounts, const char* currency) {
-    int count = 0;
-    for (int i = 0; i < numAccounts; i++)
-        if (strcmp(accounts[i].currency, currency) == 0) count++;
-    return count;
 }
 

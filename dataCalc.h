@@ -13,7 +13,6 @@ int calculateClientsByType(Client* clients, int numClients, ClientType type);
 
 int calculateTotalEmployees(Employee* employees, int numEmployees);
 int calculateEmployeesByRole(Employee* employees, int numEmployees, EmployeeRole role);
-int calculateEmployeesByLevel(Employee* employees, int numEmployees, EmployeeLevel level);
 
 int calculateTotalBranches(Branch* branches, int numBranches);
 int calculateBranchesBySize(Branch* branches, int numBranches, BranchSize size);
@@ -21,7 +20,5 @@ int calculateBranchesByClientCount(Branch* branches, int numBranches, int minCli
 
 
 int calculateTotalAccounts(Account* accounts, int numAccounts);
-int calculateAccountsByType(Account* accounts, int numAccounts, AccountType type);
-int calculateAccountsByCurrency(Account* accounts, int numAccounts, const char* currency);
 
 #endif
