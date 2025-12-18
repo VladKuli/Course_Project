@@ -126,7 +126,7 @@ void handleClientMenu() {
         case 2: { // VIEW ALL
             if (numClients == 0) {
                 cout << "No client data available.\n";
-                return;
+                break;
             }
             for (int i = 0; i < numClients; i++) {
                 viewClient(clients[i]);
@@ -340,7 +340,7 @@ void handleEmployeeMenu() {
         case 2: { // VIEW ALL
             if (numEmployees == 0) {
                 cout << "No employees data available.\n";
-                return;
+                break;
             }
             for (int i = 0; i < numEmployees; i++) {
                 viewEmployee(employees[i]);
@@ -487,7 +487,7 @@ void handleAccountMenu() {
         case 1: { // VIEW
             if (numAccounts == 0) {
                 cout << "No Accounts data available.\n";
-                return;
+                break;
             }
             for (int i = 0; i < numAccounts; i++) {
                 viewAccount(accounts[i]);
@@ -664,7 +664,7 @@ void handleBranchMenu() {
         case 2: { // VIEW
             if (numBranches == 0) {
                 cout << "No Branches data available.\n";
-                return;
+                break;
             }
             for (int i = 0; i < numBranches; i++) {
                 viewBranch(branches[i]);
