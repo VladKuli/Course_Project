@@ -34,6 +34,9 @@
     <Filter Include="Source Files\ui">
       <UniqueIdentifier>{ee502c22-57a8-4873-ab53-82e8800156df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\helper">
+      <UniqueIdentifier>{526cf627-b85c-4d75-b410-1d1d203ff1a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -74,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="deleteData.cpp">
       <Filter>Source Files\services</Filter>
+    </ClCompile>
+    <ClCompile Include="numberValidationHelper.h">
+      <Filter>Header Files\helper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
