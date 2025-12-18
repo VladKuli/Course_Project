@@ -5,6 +5,7 @@ using namespace std;
 // ===== MAIN MENU =====
 void displayMainMenu() {
     cout << endl;
+    cout << "----------------\n";
     cout << "MAIN MENU\n";
     cout << "----------------\n";
     cout << "1. Clients\n";
@@ -17,6 +18,7 @@ void displayMainMenu() {
     // ===== ACCOUNT MENU =====
 void displayAccountMenu() { 
     cout << endl;
+    cout << "---------------------\n";
     cout << "---- Account Menu ----\n";
     cout << "1. View All Accounts\n";
     cout << "2. Edit Account\n";
@@ -32,6 +34,7 @@ void displayAccountMenu() {
 // ===== CLIENT MENU =====
 void displayClientMenu() {
     cout << endl;
+    cout << "---------------------\n";
     cout << "---- Client Menu ----\n";
     cout << "1. Add Client\n";
     cout << "2. View All Clients\n";
@@ -46,6 +49,7 @@ void displayClientMenu() {
 // ===== EMPLOYEE MENU =====
 void displayEmployeeMenu() {
     cout << endl;
+    cout << "---------------------\n";
     cout << "---- Employee Menu ----\n";
     cout << "1. Add Employee\n";
     cout << "2. View All Employees\n";
@@ -60,6 +64,7 @@ void displayEmployeeMenu() {
 // ===== BRANCH MENU =====
 void displayBranchMenu() {
     cout << endl;
+    cout << "---------------------\n";
     cout << "---- Branch Menu ----\n";
     cout << "1. Add Branch\n";
     cout << "2. View All Branches\n";

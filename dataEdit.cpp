@@ -128,5 +128,6 @@ void editBranch(Branch& branch) {
     case 2: branch.size = MEDIUM; break;
     case 3: branch.size = LARGE; break;
     }
+
 }
 

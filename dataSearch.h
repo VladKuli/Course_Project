@@ -7,6 +7,16 @@
 #include "Account.h"
 #include "Branch.h"
 
+template<typename T, size_t N>
+T* searchByStringField(T* arr, int count, const char* value, char (T::* field)[N]) {
+    for (int i = 0; i < count; i++) {
+        if (strcmp(arr[i].*field, value) == 0) {
+            return &arr[i];
+        }
+    }
+    return nullptr;
+}
+
 Client* searchClientById(Client* clients, int numClients, long id);
 Client* searchClientByName(Client* clients, int numClients, const char* name);
 Client* searchClientByEmail(Client* clients, int numClients, const char* email);

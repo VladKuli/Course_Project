@@ -2,7 +2,6 @@
 #include <cstring>
 #include <ctime>
 
-// ---------------- CLIENT CALCULATIONS ----------------
 int calculateTotalClients(Client* clients, int numClients) {
     return numClients;
 }
@@ -21,7 +20,6 @@ int calculateClientsByType(Client* clients, int numClients, ClientType type) {
     return count;
 }
 
-// ---------------- EMPLOYEE CALCULATIONS ----------------
 int calculateTotalEmployees(Employee* employees, int numEmployees) {
     return numEmployees;
 }
@@ -33,7 +31,6 @@ int calculateEmployeesByRole(Employee* employees, int numEmployees, EmployeeRole
     return count;
 }
 
-// ---------------- BRANCH CALCULATIONS ----------------
 int calculateTotalBranches(Branch* branches, int numBranches) {
     return numBranches;
 }
@@ -52,7 +49,6 @@ int calculateBranchesByClientCount(Branch* branches, int numBranches, int minCli
     return count;
 }
 
-// ---------------- ACCOUNT CALCULATIONS ----------------
 int calculateTotalAccounts(Account* accounts, int numAccounts) {
     return numAccounts;
 }
