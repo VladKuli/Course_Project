@@ -1,5 +1,5 @@
-﻿#include "../Course_Project/dataView.h"
-#include "../Course_Project/dataSearch.h"
+﻿#include "dataView.h"
+#include "dataSearch.h"
 
 #include <iostream>
 #include <iomanip>

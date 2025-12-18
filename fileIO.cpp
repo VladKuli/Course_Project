@@ -1,7 +1,7 @@
-#include "../Course_Project/Client.h"
-#include "../Course_Project/Employee.h"
-#include "../Course_Project/Account.h"
-#include "../Course_Project/Branch.h"
+#include "Client.h"
+#include "Employee.h"
+#include "Account.h"
+#include "Branch.h"
 #include <cstdio>
 
 // --------------------- UNIVERSAL LOAD FUNCTION ---------------------

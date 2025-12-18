@@ -2,10 +2,10 @@
 #ifndef DATACALC_H
 #define DATACALC_H
 
-#include "../Course_Project/Client.h"
-#include "../Course_Project/Employee.h"
-#include "../Course_Project/Branch.h"
-#include "../Course_Project/Account.h"
+#include "Client.h"
+#include "Employee.h"
+#include "Branch.h"
+#include "Account.h"
 
 int calculateTotalClients(Client* clients, int numClients);
 int calculateClientsByLevel(Client* clients, int numClients, ClientLevel level);

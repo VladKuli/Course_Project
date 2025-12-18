@@ -1,4 +1,4 @@
-#include "../Course_Project/dataEdit.h"
+#include "dataEdit.h"
 #include <cstring>
 #include <iostream>
 
