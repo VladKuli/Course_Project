@@ -5,8 +5,15 @@ A console-based C++ application for managing banking operations including branch
 ## Quick Start
 
 ### Build and Run
+
+**Using Visual Studio** (Recommended):
+1. Open `Course_Project.sln` in Visual Studio
+2. Build the solution (F7 or Build → Build Solution)
+3. Run the application (F5 or Debug → Start Debugging)
+
+**Using Command Line** (g++):
 ```bash
-# Compile the project using your C++ compiler
+# Compile the project using g++
 g++ -o banking_system main.cpp menu.cpp dataView.cpp dataEdit.cpp dataSearch.cpp dataSort.cpp dataCalc.cpp deleteData.cpp fileIO.cpp
 
 # Run the application
