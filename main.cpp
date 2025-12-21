@@ -27,7 +27,6 @@ int numAccounts = 0;
 Branch* branches = nullptr;
 int numBranches = 0;
 
-// ===================== CLIENT MENU =====================
 void handleClientMenu() {
     int choice;
     do {

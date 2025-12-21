@@ -1,7 +1,6 @@
 #include "deleteData.h"
 #include <cstring>
 
-// ---------------- CLIENT DELETE ----------------
 bool deleteClientById(Client*& clients, int& numClients, long id) {
     for (int i = 0; i < numClients; i++) {
         if (clients[i].id == id) {
@@ -46,7 +45,6 @@ bool deleteClientByEmail(Client*& clients, int& numClients, const char* email) {
     return false;
 }
 
-// ---------------- EMPLOYEE DELETE ----------------
 bool deleteEmployeeById(Employee*& employees, int& numEmployees, long id) {
     for (int i = 0; i < numEmployees; ++i) {
         if (employees[i].id == id) {
@@ -54,7 +52,6 @@ bool deleteEmployeeById(Employee*& employees, int& numEmployees, long id) {
                 employees[j] = employees[j + 1];
             }
             numEmployees--;
-            // Optionally shrink the array
             Employee* tmp = new Employee[numEmployees];
             for (int k = 0; k < numEmployees; ++k) tmp[k] = employees[k];
             delete[] employees;
@@ -93,7 +90,6 @@ bool deleteEmployeeByEmail(Employee*& employees, int& numEmployees, const char* 
     return false;
 }
 
-// ---------------- ACCOUNT DELETE ----------------
 bool deleteAccountById(Account*& accounts, int& numAccounts, long id) {
     for (int i = 0; i < numAccounts; i++) {
         if (accounts[i].id == id) {
@@ -136,7 +132,6 @@ bool deleteAccountByClientId(Account*& accounts, int& numAccounts, long clientId
     return false;
 }
 
-// ---------------- BRANCH DELETE ----------------
 bool deleteBranchById(Branch*& branches, int& numBranches, long id) {
     for (int i = 0; i < numBranches; i++) {
         if (branches[i].id == id) {

@@ -2,7 +2,6 @@
 #include "../Course_Project/menu.h"
 using namespace std;
 
-// ===== MAIN MENU =====
 void displayMainMenu() {
     cout << endl;
     cout << "----------------\n";
@@ -15,7 +14,6 @@ void displayMainMenu() {
     cout << "0. Exit\n";
     cout << endl;
 }
-    // ===== ACCOUNT MENU =====
 void displayAccountMenu() { 
     cout << endl;
     cout << "---------------------\n";
@@ -31,7 +29,6 @@ void displayAccountMenu() {
 
 
 
-// ===== CLIENT MENU =====
 void displayClientMenu() {
     cout << endl;
     cout << "---------------------\n";
@@ -46,7 +43,6 @@ void displayClientMenu() {
     cout << "0. Back to Main Menu\n";
 }
 
-// ===== EMPLOYEE MENU =====
 void displayEmployeeMenu() {
     cout << endl;
     cout << "---------------------\n";
@@ -61,7 +57,6 @@ void displayEmployeeMenu() {
     cout << "0. Back to Main Menu\n";
 }
 
-// ===== BRANCH MENU =====
 void displayBranchMenu() {
     cout << endl;
     cout << "---------------------\n";

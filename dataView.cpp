@@ -34,7 +34,6 @@ void viewClient(const Client& c) {
     }
     cout << "\n";
 
-    // Show Branch info
     Branch* b = searchBranchById(branches, numBranches, c.branchId);
     if (b) {
         cout << "Branch:    " << b->name << " (ID: " << b->id << ")\n";
@@ -44,7 +43,6 @@ void viewClient(const Client& c) {
         cout << "Branch:    Not found\n";
     }
 
-    // Show Account info
     bool foundAccount = false;
     for (int i = 0; i < numAccounts; ++i) {
         if (accounts[i].clientId == c.id) {
@@ -78,7 +76,6 @@ void viewEmployee(const Employee& e) {
     }
     cout << "\n";
 
-    // Show Branch info
     Branch* b = searchBranchById(branches, numBranches, e.branchId);
     if (b) {
         cout << "Branch:    " << b->name << " (ID: " << b->id << ")\n";

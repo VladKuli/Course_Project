@@ -2,10 +2,10 @@
 #ifndef FILEIO_H
 #define FILEIO_H
 
-#include "../Course_Project/Client.h"
-#include "../Course_Project/Employee.h"
-#include "../Course_Project/Account.h"
-#include "../Course_Project/Branch.h"
+#include "Client.h"
+#include "Employee.h"
+#include "Account.h"
+#include "Branch.h"
 
 bool loadClients(const char* filename, Client** clients, int* numClients);
 bool saveClients(const char* filename, Client* clients, int numClients);

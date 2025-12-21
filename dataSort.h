@@ -19,5 +19,6 @@ void sortAccountsByBalance(Account* accounts, int numAccounts);
 void sortBranchesByName(Branch* branches, int numBranches);
 void sortBranchesBySize(Branch* branches, int numBranches);
 void sortBranchesByClientCount(Branch* branches, int numBranches, const Client* clients, int numClients);
+
 int countClientsForBranch(const Branch& branch, const Client* clients, int numClients);
 #endif

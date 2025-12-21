@@ -1,7 +1,6 @@
 #include "datasort.h"
 #include <cstring>
 
-// ---------------- CLIENT SORT ----------------
 void sortClientsByName(Client* clients, int numClients) {
     for (int i = 0; i < numClients - 1; i++)
         for (int j = 0; j < numClients - i - 1; j++)
@@ -32,7 +31,6 @@ void sortClientByEmail(Client* clients, int numClients) {
             }
 }
 
-// ---------------- EMPLOYEE SORT ----------------
 void sortEmployeesByName(Employee* employees, int numEmployees) {
     for (int i = 0; i < numEmployees - 1; i++)
         for (int j = 0; j < numEmployees - i - 1; j++)
@@ -53,7 +51,6 @@ void sortEmployeesByRole(Employee* employees, int numEmployees) {
             }
 }
 
-// ---------------- ACCOUNT SORT ----------------
 void sortAccountsByBalance(Account* accounts, int numAccounts) {
     for (int i = 0; i < numAccounts - 1; i++)
         for (int j = 0; j < numAccounts - i - 1; j++)
@@ -64,7 +61,6 @@ void sortAccountsByBalance(Account* accounts, int numAccounts) {
             }
 }
 
-// ---------------- BRANCH SORT ----------------
 void sortBranchesByName(Branch* branches, int numBranches) {
     for (int i = 0; i < numBranches - 1; i++)
         for (int j = 0; j < numBranches - i - 1; j++)
