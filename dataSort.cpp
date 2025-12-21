@@ -84,7 +84,7 @@ void sortBranchesBySize(Branch* branches, int numBranches) {
 
 int countClientsForBranch(const Branch& branch, const Client* clients, int numClients) {
     int count = 0;
-    for (int i = 0; i < numClients; ++i) {
+    for (int i = 0; i < numClients; i++) {
         if (clients[i].branchId == branch.id) count++;
     }
     return count;
@@ -92,8 +92,8 @@ int countClientsForBranch(const Branch& branch, const Client* clients, int numCl
 
 void sortBranchesByClientCount(Branch* branches, int numBranches, const Client* clients, int numClients) {
 
-    for (int i = 0; i < numBranches - 1; ++i) {
-        for (int j = 0; j < numBranches - i - 1; ++j) {
+    for (int i = 0; i < numBranches - 1; i++) {
+        for (int j = 0; j < numBranches - i - 1; j++) {
             int countA = countClientsForBranch(branches[j], clients, numClients);
             int countB = countClientsForBranch(branches[j + 1], clients, numClients);
             if (countA < countB) {

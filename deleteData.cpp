@@ -46,14 +46,14 @@ bool deleteClientByEmail(Client*& clients, int& numClients, const char* email) {
 }
 
 bool deleteEmployeeById(Employee*& employees, int& numEmployees, long id) {
-    for (int i = 0; i < numEmployees; ++i) {
+    for (int i = 0; i < numEmployees; i++) {
         if (employees[i].id == id) {
-            for (int j = i; j < numEmployees - 1; ++j) {
+            for (int j = i; j < numEmployees - 1; j++) {
                 employees[j] = employees[j + 1];
             }
             numEmployees--;
             Employee* tmp = new Employee[numEmployees];
-            for (int k = 0; k < numEmployees; ++k) tmp[k] = employees[k];
+            for (int k = 0; k < numEmployees; k++) tmp[k] = employees[k];
             delete[] employees;
             employees = tmp;
             return true;

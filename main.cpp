@@ -45,7 +45,7 @@ void handleClientMenu() {
             Client c;
             c.id = numClients + 1;
             cout << "Available branches:\n";
-            for (int i = 0; i < numBranches; ++i) {
+            for (int i = 0; i < numBranches; i++) {
                 cout << "  " << branches[i].id << ". " << branches[i].name << " (" << branches[i].address << ")\n";
             }
 
@@ -54,9 +54,8 @@ void handleClientMenu() {
             do {
                 getValidatedInput(branchId, "Enter branch ID for this client: ");
                 
-                // Check if branch ID exists
                 validBranch = false;
-                for (int i = 0; i < numBranches; ++i) {
+                for (int i = 0; i < numBranches; i++) {
                     if (branches[i].id == branchId) {
                         validBranch = true;
                         break;
@@ -71,16 +70,16 @@ void handleClientMenu() {
             c.branchId = branchId;
 
             cout << "Name: ";
-            cin.getline(c.name, 50);
+            cin.getline(c.name, 15);
 
             cout << "Address: ";
-            cin.getline(c.address, 100);
+            cin.getline(c.address, 15);
 
             cout << "Phone: ";
             cin.getline(c.phone, 15);
 
             cout << "Email: ";
-            cin.getline(c.email, 50);
+            cin.getline(c.email, 15);
 
             int typeChoice;
             do {
@@ -195,10 +194,10 @@ void handleClientMenu() {
                 }
             }
             else if (s == 2) {
-                char name[50];
+                char name[15];
 
                 cout << "Name: ";
-                cin.getline(name, 50);
+                cin.getline(name, 15);
 
                 Client* c = searchClientByName(clients, numClients, name);
 
@@ -210,10 +209,10 @@ void handleClientMenu() {
                 }
             }
             else if (s == 3) {
-                char email[50];
+                char email[15];
 
                 cout << "Email: ";
-                cin.getline(email, 50);
+                cin.getline(email, 15);
 
                 Client* c = searchClientByEmail(clients, numClients, email);
 
@@ -262,15 +261,15 @@ void handleClientMenu() {
                 result = deleteClientById(clients, numClients, id);
             }
             else if (d == 2) {
-                char name[50];
+                char name[15];
                 cout << "Name: ";
-                cin.getline(name, 50);
+                cin.getline(name, 15);
                 result = deleteClientByName(clients, numClients, name);
             }
             else if (d == 3) {
-                char email[50];
+                char email[15];
                 cout << "Email: ";
-                cin.getline(email, 50);
+                cin.getline(email, 15);
                 result = deleteClientByEmail(clients, numClients, email);
             }
             cout << (result
@@ -294,7 +293,6 @@ void handleClientMenu() {
     } while (choice != 0);
 }
 
-// ===================== EMPLOYEE MENU =====================
 void handleEmployeeMenu() {
     int choice;
 
@@ -316,7 +314,7 @@ void handleEmployeeMenu() {
             e.id = numEmployees + 1;
 
             cout << "Available branches:\n";
-            for (int i = 0; i < numBranches; ++i) {
+            for (int i = 0; i < numBranches; i++) {
                 cout << "  " << branches[i].id << ". " << branches[i].name << " (" << branches[i].address << ")\n";
             }
             long branchId;
@@ -325,9 +323,8 @@ void handleEmployeeMenu() {
             do {
                 getValidatedInput(branchId, "Enter branch ID for this employee: ");
                 
-                // Check if branch ID exists
                 validBranch = false;
-                for (int i = 0; i < numBranches; ++i) {
+                for (int i = 0; i < numBranches; i++) {
                     if (branches[i].id == branchId) {
                         validBranch = true;
                         break;
@@ -342,13 +339,13 @@ void handleEmployeeMenu() {
             e.branchId = branchId;
 
             cout << "Name: ";
-            cin.getline(e.name, 50);
+            cin.getline(e.name, 15);
 
             cout << "Position: ";
-            cin.getline(e.position, 50);
+            cin.getline(e.position, 15);
 
             cout << "Email: ";
-            cin.getline(e.email, 50);
+            cin.getline(e.email, 15);
 
             cout << "Phone: ";
             cin.getline(e.phone, 15);
@@ -425,9 +422,9 @@ void handleEmployeeMenu() {
                 }
             }
             else if (s == 2) {
-                char name[50];
+                char name[15];
                 cout << "Name: ";
-                cin.getline(name, 50);
+                cin.getline(name, 15);
 
                 Employee* e = searchEmployeeByName(employees, numEmployees, name);
 
@@ -439,9 +436,9 @@ void handleEmployeeMenu() {
                 }
             }
             else if (s == 3) {
-                char email[50];
+                char email[15];
                 cout << "Email: ";
-                cin.getline(email, 50);
+                cin.getline(email, 15);
 
                 Employee* e = searchEmployeeByEmail(employees, numEmployees, email);
 
@@ -487,15 +484,15 @@ void handleEmployeeMenu() {
                 result = deleteEmployeeById(employees, numEmployees, id);
             }
             else if (d == 2) {
-                char name[50];
+                char name[15];
                 cout << "Name: ";
-                cin.getline(name, 50);
+                cin.getline(name, 15);
                 result = deleteEmployeeByName(employees, numEmployees, name);
             }
             else if (d == 3) {
-                char email[50];
+                char email[15];
                 cout << "Email: ";
-                cin.getline(email, 50);
+                cin.getline(email, 15);
                 result = deleteEmployeeByEmail(employees, numEmployees, email);
             }
             cout << (result ? "Deleted.\n" : "Not found.\n");
@@ -517,7 +514,6 @@ void handleEmployeeMenu() {
     } while (choice != 0);
 }
 
-// ===================== ACCOUNT MENU =====================
 void handleAccountMenu() {
     int choice;
     do {
@@ -647,7 +643,6 @@ void handleAccountMenu() {
     } while (choice != 0);
 }
 
-// ===================== BRANCH MENU =====================
 void handleBranchMenu() {
     int choice;
     do {
@@ -664,16 +659,16 @@ void handleBranchMenu() {
             b.id = numBranches + 1;
 
             cout << "Name: ";
-            cin.getline(b.name, 50);
+            cin.getline(b.name, 15);
 
             cout << "Address: ";
-            cin.getline(b.address, 100);
+            cin.getline(b.address, 15);
 
             cout << "Phone: ";
             cin.getline(b.phone, 15);
 
             cout << "Email: ";
-            cin.getline(b.email, 50);
+            cin.getline(b.email, 15);
 
             int sizeChoice;
             do {
@@ -744,9 +739,9 @@ void handleBranchMenu() {
                 }
             }
             else if (s == 2) {
-                char name[50];
+                char name[15];
                 cout << "Name: ";
-                cin.getline(name, 50);
+                cin.getline(name, 15);
                
                 Branch* b = searchBranchByName(branches, numBranches, name);
                 
@@ -805,7 +800,6 @@ void handleBranchMenu() {
     } while (choice != 0);
 }
 
-// ===================== MAIN =====================
 int main() {
     loadClients("clients.dat", &clients, &numClients);
     loadEmployees("employees.dat", &employees, &numEmployees);

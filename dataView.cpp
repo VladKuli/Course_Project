@@ -2,20 +2,8 @@
 #include "dataSearch.h"
 
 #include <iostream>
-#include <iomanip>
 
 using namespace std;
-
-
-extern Client* clients;
-extern int numClients;
-extern Branch* branches;
-extern int numBranches;
-extern Account* accounts;
-extern int numAccounts;
-extern Employee* employees;
-extern int numEmployees;
-
 
 void viewClient(const Client& c) {
     cout << "-------------------- Client Information --------------------\n";
@@ -146,8 +134,5 @@ void viewBranch(const Branch& b) {
     cout << "Employees: " << employeeCount << "\n";
     cout << "Clients:   " << clientCount << "\n";
     cout << "-----------------------------------------------------------\n";
+
 }
-
-
-
-

@@ -1,9 +1,6 @@
 #include "dataSearch.h"
 #include <cstring>
 
-
-#pragma once
-
 Client* searchClientById(Client* clients, int numClients, long id) {
     for (int i = 0; i < numClients; i++)
         if (clients[i].id == id) return &clients[i];

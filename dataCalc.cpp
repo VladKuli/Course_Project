@@ -52,4 +52,3 @@ int calculateBranchesByClientCount(Branch* branches, int numBranches, int minCli
 int calculateTotalAccounts(Account* accounts, int numAccounts) {
     return numAccounts;
 }
-
