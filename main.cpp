@@ -14,7 +14,6 @@
 
 using namespace std;
 
-
 Client* clients = nullptr;
 int numClients = 0;
 
@@ -51,7 +50,24 @@ void handleClientMenu() {
             }
 
             long branchId;
-            getValidatedInput(branchId, "Enter branch ID for this client: ");
+            bool validBranch = false;
+            do {
+                getValidatedInput(branchId, "Enter branch ID for this client: ");
+                
+                // Check if branch ID exists
+                validBranch = false;
+                for (int i = 0; i < numBranches; ++i) {
+                    if (branches[i].id == branchId) {
+                        validBranch = true;
+                        break;
+                    }
+                }
+                
+                if (!validBranch) {
+                    cout << "Invalid branch ID. Please select from the available branches." << endl;
+                }
+            } while (!validBranch);
+            
             c.branchId = branchId;
 
             cout << "Name: ";
@@ -67,13 +83,25 @@ void handleClientMenu() {
             cin.getline(c.email, 50);
 
             int typeChoice;
-            getValidatedInput(typeChoice, "Type of the client (1. Individual, 2. Company): ");
+            do {
+                getValidatedInput(typeChoice, "Type of the client (1. Individual, 2. Company): ");
+                if (typeChoice < 1 || typeChoice > 2) {
+                    cout << "Invalid choice. Please enter 1 or 2.\n";
+                }
+            } while (typeChoice < 1 || typeChoice > 2);
+
             c.type = (typeChoice == 1)
                 ? INDIVIDUAL
                 : COMPANY;
 
             int levelChoice;
-            getValidatedInput(levelChoice, "Client level (1. Regular, 2. Premium, 3. VIP): ");
+            do {
+                getValidatedInput(levelChoice, "Client level (1. Regular, 2. Premium, 3. VIP): ");
+                if (levelChoice < 1 || levelChoice > 3) {
+                    cout << "Invalid choice. Please enter a number between 1 and 3.\n";
+                }
+            } while (levelChoice < 1 || levelChoice > 3);
+
             if (levelChoice == 1) {
                 c.level = REGULAR;
             }
@@ -93,13 +121,13 @@ void handleClientMenu() {
             clients = tmp;
             numClients++;
 
-            cout << "Client added.\n";
+            cout << "Client added." << endl;
 
             Account a;
             a.id = numAccounts + 1;
             a.clientId = c.id;
 
-            getValidatedInput(a.number, "Account number: ");
+            getValidatedInput(a.number, "\nAccount number: ");
 
             do {
                 getValidatedInput(a.balance, "Initial balance: ");
@@ -293,7 +321,24 @@ void handleEmployeeMenu() {
             }
             long branchId;
 
-            getValidatedInput(branchId, "Enter branch ID for this employee: ");
+            bool validBranch = false;
+            do {
+                getValidatedInput(branchId, "Enter branch ID for this employee: ");
+                
+                // Check if branch ID exists
+                validBranch = false;
+                for (int i = 0; i < numBranches; ++i) {
+                    if (branches[i].id == branchId) {
+                        validBranch = true;
+                        break;
+                    }
+                }
+                
+                if (!validBranch) {
+                    cout << "Invalid branch ID. Please select from the available branches." << endl;
+                }
+            } while (!validBranch);
+            
             e.branchId = branchId;
 
             cout << "Name: ";

@@ -13,7 +13,6 @@
 #include "dataSort.h"
 #include "fileIO.h"
 
-// --------------------- DISPLAY MENUS ---------------------
 void displayMainMenu();
 void displayClientMenu();
 void displayEmployeeMenu();

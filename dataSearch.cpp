@@ -3,7 +3,6 @@
 
 
 #pragma once
-#include <cstring>
 
 Client* searchClientById(Client* clients, int numClients, long id) {
     for (int i = 0; i < numClients; i++)
